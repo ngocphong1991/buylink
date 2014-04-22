@@ -123,8 +123,6 @@ function submitWebsiteStep1()
 	$('websiteErrors').style.display = 'none';
 	$('websiteErrors').innerHTML = '';
 	$('btnSubmitWebsite1').style.display = 'none';
-	$('websiteFormLoading').style.display = 'inline';
-
 	new Ajax.Request(base_url+"ajax/publish_site.php", {
 
 		onSuccess : function(resp) {
@@ -139,13 +137,11 @@ function submitWebsiteStep1()
 				$('websiteErrors').innerHTML = data.output;
 				$('websiteErrors').style.display = 'block';
 			}
-			$('websiteFormLoading').style.display = 'none';
 			$('btnSubmitWebsite1').style.display = 'block';
 		},
 
 		onFailure : function(resp) {
 			alert('Sorry, a problem occurred. Your site has not been submitted.');
-			$('websiteFormLoading').style.display = 'none';
 			$('btnSubmitWebsite1').style.display = 'block';
 		},
 
@@ -163,7 +159,6 @@ function submitWebsiteStep2()
 {
 	$('btnSubmitWebsite2').style.display = 'none';
 	$('btnWebsiteGoBack').style.display = 'none';
-	$('websiteFormLoading').style.display = 'inline';
 
 	new Ajax.Request(base_url+"/ajax/publish_site.php", {
 
@@ -175,7 +170,6 @@ function submitWebsiteStep2()
 				$('submitWebsiteStep2').style.display = 'none';
 				$("submitWebsiteStep3").style.display = 'block';
 
-				$('websiteFormLoading').style.display = 'none';
 				$('btnSubmitWebsite2').style.display = 'block';
 				$('btnWebsiteGoBack').style.display = 'block';
 			}
@@ -184,7 +178,6 @@ function submitWebsiteStep2()
 
 		onFailure : function(resp) {
 			alert('Sorry, a problem occurred. Your site has not been submitted.');
-			$('websiteFormLoading').style.display = 'none';
 			$('btnSubmitWebsite2').style.display = 'block';
 			$('btnWebsiteGoBack').style.display = 'block';
 		},
