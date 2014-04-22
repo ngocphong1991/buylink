@@ -13,9 +13,9 @@ require('classes/class_news.php'); $class_news = new News(); $smarty->assign('cl
 $allnews = $class_news->getAll('1=1 order by order_no limit 0,4');
 $smarty->assign('allnews',$allnews);
 
-$meta[title] ='Textlink.vn - Mạng quảng cáo textlink hàng đầu và duy nhất tại Việt Nam !';
-$meta[des] ='Textlink.vn mang đến cho các chủ website cơ hội phát triển và kiếm tiền bền vững cùng chúng tôi. Đến với Textlink, các bạn sẽ là những người mang đến sự đổi mới cho ngành Internet Marketing tại Việt Nam. Bạn còn chần chừ gì nữa ?
-Keywords: textlink, backlinks, seo, sem, internet marketing, online marketing, top 1 google, top 1 yahoo.';
+$meta[title] ='Buylink - Mạng quảng cáo buylink hàng đầu và duy nhất tại Việt Nam !';
+$meta[des] ='Buylink mang đến cho các chủ website cơ hội phát triển và kiếm tiền bền vững cùng chúng tôi. Đến với Buylink, các bạn sẽ là những người mang đến sự đổi mới cho ngành Internet Marketing tại Việt Nam. Bạn còn chần chừ gì nữa ?
+Keywords: buylink, backlinks, seo, sem, internet marketing, online marketing, top 1 google, top 1 yahoo.';
 $smarty->assign('meta', $meta);
 
 $smarty->assign('nmsg',$nmsg);	

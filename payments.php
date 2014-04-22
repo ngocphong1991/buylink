@@ -3,7 +3,8 @@ if(!isset($_SESSION[uid]) || $_SESSION[uid]<=0) exit();?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
 <center>
   <font face='Verdana, Arial, Helvetica, sans-serif'>Please Wait...</font>
@@ -21,9 +22,8 @@ if(!isset($_SESSION[uid]) || $_SESSION[uid]<=0) exit();?>
   <input type='hidden' name='custom' value='<?=$_SESSION[uid]?>' />
   <input type='hidden' name='cancel_return' value='<?=$_config['www']?>/browse.php'>
   <input type='hidden' name='notify_url' value='<?=$_config['www']?>/notify.php?uid=<?=$_SESSION[uid]?>&status=1'> 
-<!--<input type='image'	src='https://www.paypal.com/images/x-click-but20.gif' border='0' name='submit' alt='Make payments with PayPal - it is fast, free and secure!'>-->
-	<?php	
-	
+
+  <?php
 	$adv_payment = mysql_query("select * from advertisersinfo where uid='$_SESSION[uid]' and is_paid='N' order by adv_id desc");
 	$counter=0;
 	while($row = mysql_fetch_assoc($adv_payment)) {	
@@ -35,14 +35,11 @@ if(!isset($_SESSION[uid]) || $_SESSION[uid]<=0) exit();?>
 		elseif($_SESSION[couponPrice]>0)
 			$price = $row[price] - $row[price]*$_SESSION[couponPrice];
 		else $price = $row[price];
-		//$w = mysql_result(mysql_query("select websitename from publishersinfo where pid=$row[pid]"),0,0);
-		//$l = mysql_result(mysql_query("select length from publishers_adspaces where ad_id=$row[ad_id]"),0,0);
-		//$money_charge += $price;
 		?>
 		<input type="hidden" name="item_name_<?=++$counter?>" value="<?=$row[ad_url].' (on '.$web_name.')'?>">
 		<input type="hidden" name="amount_<?=$counter?>" value="<?=$price;?>">
 		<input type="hidden" name="item_number_<?=$counter?>" value="ADV<?=$row[adv_id]?>">	
-  <?php } ?>
+  <?php }?>
   </form>  
 <script type="text/javascript">
 	document.forms['paypal_pay'].submit();

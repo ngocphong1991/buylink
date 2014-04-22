@@ -9,13 +9,13 @@
 	if (!$con) {
 	   die('Could not connect: ' . mysql_error());
 	}
-	
+
 	$db_selected = mysql_select_db($db_name, $con);
-	
+
 	if (!$db_selected) {
 	   die ('Can not use database : ' . mysql_error());
 	}
-	
+
 	define("DB_SERVER", $host_name);
 	define("DB_USERNAME", $db_user);
 	define("DB_PASSWORD", $db_pass);
