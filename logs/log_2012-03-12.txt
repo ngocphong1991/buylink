@@ -1,0 +1,32 @@
+
+				<html>
+				<head>
+				 <title>New Account Registration</title>
+				</head>
+				<body>
+				 <p>Dear tienrua</p>
+				 
+				 Thankyou for registering with us.<br />
+				Here is your username and password.<br />
+
+
+Username:  tienrua<br />
+
+Password: ruatien<br />
+<br />
+<br />
+<br />
+
+
+
+Regards<br />
+<br />
+
+
+TextLink Ads<br />
+
+http://localhost/ad<br />
+
+				</body>
+				</html>
+				
