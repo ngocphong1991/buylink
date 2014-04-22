@@ -70,6 +70,7 @@ if(isset($_POST) && count($_POST)){
 
 	if(count($msg)==0){
         if(register_new_user($_SESSION)){
+            login(trim($_SESSION['username']), $_SESSION['text_ad_pass']);
             header('Location: '.$_config['wwww'].'profile');
         }
     }

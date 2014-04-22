@@ -137,5 +137,5 @@ if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['action']=="submit"){
 }
 $content = $smarty->fetch('pay-cart.tpl');
 $smarty->assign('content',$content);
-$smarty->display('master_static.tpl');
+$smarty->display('master_page.tpl');
 ?>

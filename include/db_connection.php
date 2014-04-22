@@ -58,7 +58,7 @@
     }
     function getAll($cons){
         if($cons!='') $cons = " where ".$cons;
-		//echo "SELECT * FROM ".$this->tbl.$cons;
+
         if($sql = mysql_query("SELECT * FROM ".$this->tbl.$cons)) {
             $arr="";
             while($_cn= mysql_fetch_assoc($sql)){

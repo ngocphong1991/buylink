@@ -33,7 +33,7 @@
                 <ul>
                     <li {if $module_name == 'profile' &&  $page == ''}class="menu-active"{/if}><a href="{$_config.www}/profile" title="Thông tin tài khoản">Thông tin tài khoản</a></li>
                     <li {if $module_name == 'profile' &&  $page == 'history'}class="menu-active"{/if}><a href="{$_config.www}/profile?page=history" title="Lịch sử giao dịch">Lịch sử giao dịch</a></li>
-                    <li {if $module_name == 'profile' &&  $page == 'money'}class="menu-active"{/if}><a href="{$_config.www}/profile?page=money" title="Nạp tiền">Nạp tiền</a></li>
+                    <li {if $module_name == 'payment'}class="menu-active"{/if}><a href="{$_config.www}/payment" title="Nạp tiền">Nạp tiền</a></li>
                     <li {if $module_name == 'profile' &&  $page == 'money_coupon'}class="menu-active"{/if}><a href="{$_config.www}/profile?page=money_coupon" title="Nạp tiền từ coupon">Nạp tiền từ coupon</a></li>
                     <li {if $module_name == 'profile' &&  $page == 'transfer'}class="menu-active"{/if}><a href="{$_config.www}/profile?page=transfer" title="Chuyển tiền">Chuyển tiền</a></li>
                 </ul>

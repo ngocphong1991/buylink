@@ -3,25 +3,25 @@
 	$db_user = 'root';
 	$db_pass = 'link!@#';
 	$db_name = 'textlink';
-	
+
 	$con = mysql_pconnect($host_name, $db_user, $db_pass);
-	
+
 	if (!$con) {
 	   die('Could not connect: ' . mysql_error());
 	}
-	
+
 	$db_selected = mysql_select_db($db_name, $con);
-	
+
 	if (!$db_selected) {
 	   die ('Can not use database : ' . mysql_error());
 	}
-	
+
 	define("DB_SERVER", $host_name);
 	define("DB_USERNAME", $db_user);
 	define("DB_PASSWORD", $db_pass);
 	define("DB_DATABASE", $db_name);
 	define("RECORD_PER_PAGE", 10);
-    
+
 	class dbBasic{
     function dbBasic(){
         if(!$cnn = mysql_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD))
@@ -115,20 +115,20 @@
     }
     function toSlug($doc) {
 		$str = addslashes(html_entity_decode($doc));
-		$str = preg_replace("/(�|�|?|?|�|�|?|?|?|?|?|a|?|?|?|?|?)/", 'a', $str);
-		$str = preg_replace("/(�|�|?|?|?|�|?|?|?|?|?)/", 'e', $str);
-		$str = preg_replace("/(�|�|?|?|i)/", 'i', $str);
-		$str = preg_replace("/(�|�|?|?|�|�|?|?|?|?|?|o|?|?|?|?|?)/", 'o', $str);
-		$str = preg_replace("/(�|�|?|?|u|u|?|?|?|?|?)/", 'u', $str);
-		$str = preg_replace("/(?|�|?|?|?)/", 'y', $str);
+		$str = preg_replace("/(?|?|?|?|?|?|?|?|?|?|?|a|?|?|?|?|?)/", 'a', $str);
+		$str = preg_replace("/(?|?|?|?|?|?|?|?|?|?|?)/", 'e', $str);
+		$str = preg_replace("/(?|?|?|?|i)/", 'i', $str);
+		$str = preg_replace("/(?|?|?|?|?|?|?|?|?|?|?|o|?|?|?|?|?)/", 'o', $str);
+		$str = preg_replace("/(?|?|?|?|u|u|?|?|?|?|?)/", 'u', $str);
+		$str = preg_replace("/(?|?|?|?|?)/", 'y', $str);
 		$str = preg_replace("/(d)/", 'd', $str);
-		$str = preg_replace("/(�|�|?|?|�|�|?|?|?|?|?|A|?|?|?|?|?)/", 'A', $str);
-		$str = preg_replace("/(�|�|?|?|?|�|?|?|?|?|?)/", 'E', $str);
-		$str = preg_replace("/(�|�|?|?|I)/", 'I', $str);
-		$str = preg_replace("/(�|�|?|?|�|�|?|?|?|?|?|O|?|?|?|?|?)/", 'O', $str);
-		$str = preg_replace("/(�|�|?|?|U|U|?|?|?|?|?)/", 'U', $str);
-		$str = preg_replace("/(?|�|?|?|?)/", 'Y', $str);
-		$str = preg_replace("/(�)/", 'D', $str);
+		$str = preg_replace("/(?|?|?|?|?|?|?|?|?|?|?|A|?|?|?|?|?)/", 'A', $str);
+		$str = preg_replace("/(?|?|?|?|?|?|?|?|?|?|?)/", 'E', $str);
+		$str = preg_replace("/(?|?|?|?|I)/", 'I', $str);
+		$str = preg_replace("/(?|?|?|?|?|?|?|?|?|?|?|O|?|?|?|?|?)/", 'O', $str);
+		$str = preg_replace("/(?|?|?|?|U|U|?|?|?|?|?)/", 'U', $str);
+		$str = preg_replace("/(?|?|?|?|?)/", 'Y', $str);
+		$str = preg_replace("/(?)/", 'D', $str);
 		$str = preg_replace("/( )/", '-', $str);
 		$str = stripslashes($str);
         $str=strtolower($str);

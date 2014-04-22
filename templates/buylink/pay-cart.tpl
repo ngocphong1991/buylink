@@ -1,22 +1,19 @@
 <link type="text/css" rel="stylesheet" href="{$template_dir}/css/payment.css" />
-<link type="text/css" rel="stylesheet" href="{$template_dir}/css/thickbox.css" />
 {literal}
 <script type="text/javascript">
-$(document).ready(function(){    
-    $(".toggle_container").show();
-    $(".reach .toggle_container").show();
-    
-    $("h2.trigger").click(function(){
+jQuery(document).ready(function(){
+    jQuery(".toggle_container").show();
+    jQuery(".reach .toggle_container").show();
+
+    jQuery("h2.trigger").click(function(){
         $(this).toggleClass("active").next().slideToggle("slow");
     });
-    
-    $('#id_newadbutton').click(function(){
-        url = 'http://textlink.vn';
-        window.location = url;
+
+    jQuery('#id_newadbutton').click(function(){
+        window.location = base_url;
     });
-    $('#id_paymentbutton').click(function(){
-        url = 'http://textlink.vn';
-        window.location = url;
+    jQuery('#id_paymentbutton').click(function(){
+        window.location = base_url;
     });
 });
 </script>
@@ -26,8 +23,17 @@ var userphone = '{$my_profile.phone}';
 var username = '{$my_profile.fullname}';
 var useremail = '{$my_profile.email}';
 </script>
+<div class="wrapper paper">
+<div class="container">
+<div class="row">
+{include file='left-menu.tpl'}
+<div class="col-md-9 right-content-paper plus">
+<div class="banner">
+    <img src="{$template_dir}/images/ad.png">
+</div>
+<div class="right-inner">
 <div class="full" id="content">
-<h1 class="large">Nạp tiền</h1>
+<h4 class="border-bold">Nạp tiền</h4>
 <div id="contactErrors" class="formErrors"></div>
 <div id="contactResults" class="formResults"></div>        
 <div class="blk-content">
@@ -42,7 +48,7 @@ var useremail = '{$my_profile.email}';
             
             <h3 style="margin-bottom:10px; background: #E84524; font-size: 15px; color: #fff; padding: 8px 10px;">Lựa chọn phương thức nạp tiền</h3>            
 <script type="text/javascript">
-var phone_number = {$my_profile.phone};
+var phone_number = '{$my_profile.phone}';
 </script>
 <div class="method pkg">
     <img src="https://www.paypal.com/en_US/i/logo/paypal_logo.gif" width="60" style="float: left; margin-right: 35px;" />
@@ -346,9 +352,12 @@ var phone_number = {$my_profile.phone};
 -->
 </div>
 </div>
-<script type="text/javascript" src="{$template_dir}/js/jquery.jcarousel.min.js"></script>
-<script type="text/javascript" src="{$template_dir}/js/jquery.validate.js"></script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <script type="text/javascript" src="{$template_dir}/js/js-contact.js"></script>
 <script type="text/javascript" src="{$template_dir}/js/pay_cart.js"></script>
-<script type="text/javascript" src="{$template_dir}/js/thickbox2.js"></script>
 <script type="text/javascript" src="{$template_dir}/js/addfunds.js?1"></script>
