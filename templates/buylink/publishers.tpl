@@ -10,45 +10,40 @@
                 <div class="right-inner">
                     <h4 class="border-bold">WEBSITE</h4>
                     <div class="right website">
+                        <div class="alert alert-info">
+                            <p class="large"> Tổng Thu Nhập <b>{$total_earnings}</b>.<br>
+                                <em class="small">(Lưu ý rằng thu nhập có thể bị thay đổi nếu link quảng cáo bị hủy hay là không hiển thị.)</em> </p>
+                            <button style="margin-top: 20px" id="postWebsite" class="button blue-bold">Đăng website</button>
+                        </div>
                         <div class="arrow-loop-right" id="arrow-website-form"></div>
-                        <div id="websiteErrors" class="formErrors"></div>
-                        <form onsubmit="return false;" action="{$_config.www}/account/websites/" method="post" id="submitWebsiteForm" class="form-horizontal" name="submitWebsiteForm">
+                        <div id="websiteErrors" style="display: none" class="alert alert-danger"></div>
+                        <form style="display: none" onsubmit="return false;" action="{$_config.www}/account/websites/" method="post" id="submitWebsiteForm" name="submitWebsiteForm">
                             <!--Start The Step 1-->
                             <div id="submitWebsiteStep1" class="control-group">
                                 <input type="hidden" name="update_pid" value="{$smarty.post.pid}" />
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="websiteUrl">Your Website URL: *</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="col-sm-8" value="{$smarty.post.url}" name="url" id="websiteUrl" />
-                                    </div>
+                                    <label for="websiteUrl">URL website của bạn: *</label>
+                                    <input type="text" class="form-control required url" value="{$smarty.post.url}" name="url" id="websiteUrl" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="websiteTitle">Website Title: *</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="col-sm-8" value="{$smarty.post.wname}" name="wname" id="websiteTitle" />
-                                    </div>
+                                    <label for="websiteTitle">Tiêu đề Website: *</label>
+                                    <input type="text" class="form-control required" value="{$smarty.post.wname}" name="wname" id="websiteTitle" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="websiteDescription">Describe your website: *</label>
-                                    <div class="col-sm-9">
-                                        <textarea rows="4" class="txt2" cols="30" name="wdes" onkeydown="updateWebsiteDescriptionLength(this);" onkeyup="updateWebsiteDescriptionLength(this);" id="websiteDescription">{$smarty.post.wdes}</textarea>
-                                        <p class="small grey"> Minimum of 150 characters. Current: <span id="websiteDescriptionLength">0</span> </p>
-                                    </div>
+                                    <label for="websiteDescription">Mô tả về website của bạn: *</label>
+                                    <textarea rows="6" class="col-sm-12 required" minlength="150" cols="30" name="wdes" onkeydown="updateWebsiteDescriptionLength(this);" onkeyup="updateWebsiteDescriptionLength(this);" id="websiteDescription">{$smarty.post.wdes}</textarea>
+                                    <p class="col-md-12 alert alert-info" style="margin-top: 10px"> Nhập vào ít nhất 150 ký tự. ( <span id="websiteDescriptionLength">0</span> )</p>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <div class="checkbox">
+                                        <div class="checkbox" style="display: inline-block">
                                             <label>
                                                 <input type="checkbox" value="1" name="guide" id="publisherGuide">
                                                 I've read the <a href="{$_config.www}/files/publishers-guide.doc" target="_blank">Publisher's Guide</a>
                                             </label>
                                         </div>
-                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <a onclick="submitWebsiteStep1(); return false;" href="#" class="button blue" id="btnSubmitWebsite1">Đăng bán website</a>
-                                    </div>
+                                        <a onclick="submitWebsiteStep1(); return false;" href="#" class="button blue-bold" id="btnSubmitWebsite1">Đăng website</a>
                                 </div>
                             </div>
                             <!--End the step 1-->
@@ -119,15 +114,14 @@
                             </div>
                             <!--End the step 3-->
                         </form>
-                    <p class="large"> Tổng Thu Nhập <span class="bold green">{$total_earnings}</span>.<br>
-                    <em class="small">(Lưu ý rằng thu nhập có thể bị thay đổi nếu link quảng cáo bị hủy hay là không hiển thị.)</em> </p>
-                    <table class="data large width-600" id="website-table">
+                    {if $www && count($www)}
+                    <table class="data large table" id="website-table">
                     <thead>
                     <tr>
-                    <th><a href="#">Website Details</a> <img src="{$template_dir}/images/sorted-asc.gif"></th>
-                    <th style="width: 60px;"><a href="#">Added</a></th>
-                    <th style="width: 60px;">Price/month</th>
-                    <th style="width: 80px;" class="last">Manage</th>
+                    <th><a href="#">Website Details</a></th>
+                    <th><a href="#">Added</a></th>
+                    <th>Price/month</th>
+                    <th>Manage</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -160,12 +154,26 @@
                     {/section}
                     </tbody>
                     </table>
+                    {/if}
                     <div class="clear"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{literal}
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('#postWebsite').click(function(){
+            jQuery('#submitWebsiteForm').show('normal');
+            jQuery(this).css('display','none');
+            jQuery('#websiteUrl').focus();
+        });
+        jQuery.validator.messages.required = "";
+        jQuery("#submitWebsiteForm").validate();
+    });
+</script>
+{/literal}
 {else}
 <div class="wrapper">
     <div class="container">

@@ -122,8 +122,7 @@ function submitWebsiteStep1()
 {
 	$('websiteErrors').style.display = 'none';
 	$('websiteErrors').innerHTML = '';
-	$('btnSubmitWebsite1').style.display = 'none';
-	new Ajax.Request(base_url+"ajax/publish_site.php", {
+	new Ajax.Request(base_url+"/ajax/publish_site.php", {
 
 		onSuccess : function(resp) {
 			var data = resp.responseText.evalJSON();
@@ -137,12 +136,10 @@ function submitWebsiteStep1()
 				$('websiteErrors').innerHTML = data.output;
 				$('websiteErrors').style.display = 'block';
 			}
-			$('btnSubmitWebsite1').style.display = 'block';
 		},
 
 		onFailure : function(resp) {
 			alert('Sorry, a problem occurred. Your site has not been submitted.');
-			$('btnSubmitWebsite1').style.display = 'block';
 		},
 
 		method:'post',

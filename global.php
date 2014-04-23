@@ -62,6 +62,6 @@ function my_money_format($formato, $valor) {
     // Se a funcao my_money_format esta disponivel: usa-la
     if (function_exists('money_format')) {
         return money_format($formato, $valor);
-    } else return $valor ."USD";
+    } else return (float)$valor ." USD";
 }
 ?>
