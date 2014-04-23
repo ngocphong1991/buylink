@@ -17,9 +17,6 @@ else $offset=0;
 $limit=10;
 $num=0;
 
-
-
-
 $lang_list = get_list('language','language');
 $smarty->assign('langs',$lang_list['language']);
 $smarty->assign('lang_ids',$lang_list['lid']);

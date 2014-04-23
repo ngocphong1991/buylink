@@ -225,5 +225,9 @@
     text-align: left;
 }
 
+.managetable tr.top{
+    background: url("../images/bg-table-top.png") repeat-x;
+}
+
 
 
