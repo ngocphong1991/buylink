@@ -15,6 +15,11 @@ $smarty->assign('cls_user', $cls_user);
 
 $totalPrice = $cls_publishersinfo->getTotalPrice();
 $yourMoney = $cls_user->getYourMoney();
+
+$smarty->assign('yourMoneyNum', $yourMoney);
+$smarty->assign('totalPriceNum', $totalPrice);
+
+
 $smarty->assign('yourMoney', my_money_format('%i',$yourMoney));
 $smarty->assign('yourMoneyStr', my_money_format('%i', $yourMoney));
 $smarty->assign('act', $_GET['act']);
