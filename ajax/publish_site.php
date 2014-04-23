@@ -15,7 +15,7 @@ if($_POST[action]=="check_website"){
 	if(strlen($_POST[wdes])<150) $error .='<li>Mô tả quá ngắn</li>';        
 	
 	 if($error){	
-		$arr = array('result'=>'failure',"output"=> '<div class="error-box small-box"><img class="error-icon" src="'.$_config["www"].'/templates/'.$_config["template"].'/images/icon-error.png" alt="" /><h3>Please correct:</h3><ul>'.$error.'</ul></div>');
+		$arr = array('result'=>'failure',"output"=> '<ul>'.$error.'</ul>');
 		echo json_encode($arr);
 	}else {		
 		$pid = register_new_publisher($_POST);      
@@ -36,7 +36,7 @@ elseif($_POST[action]=="submit_website"){//case submit website
 	if(update_publisher($_POST,"update_cat"))	
 		$arr = array("result"=>"accepted","pid"=>$_SESSION[pid], "output"=> "");
 	else
-		$arr = array("result"=>"failure","output"=> '<div class="error-box small-box"><img class="error-icon" src="'.$_config["www"].'/templates/'.$_config["template"].'/images/icon-error.png" alt="" /><h3>Please correct:</h3><ul><li>Read our Publisher\'s Guide</li></ul></div>');
+		$arr = array("result"=>"failure","output"=> '<ul><li>Read our Publisher\'s Guide</li></ul>');
 	echo json_encode($arr);
 
 }elseif($_POST[action]=="update_website"){
