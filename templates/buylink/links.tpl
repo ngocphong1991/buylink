@@ -1,83 +1,185 @@
-﻿<div class="full" id="content">
-		  <div class="right alignright">
-		    <h3></span></h3>
-		  </div>
-		  <h1 style="padding-bottom: 0px;">Quản Lý Link </h1>
-		  <div class="clear"></div>
-		  <form style="margin: 10px 0 20px 0;" method="get"  class="filter-box" id="link-filter">
-		    <fieldset>
-		      <div class="controls">
-		        <div class="third-box left">
-		          <select style="width: 80%" class="txt2" name="link-filter">
-		            <option value="ALL">-- All Statuses --</option>
-		            <option selected="selected" value="6">Active Links</option>
-		            <option value="4">Pending Links</option>
-		            <option value="8">Canceled Links</option>
-		            <option value="2">Rejected Links</option>
-		          </select>
-		          <br>
-		          <br>
-		          <select style="width: 80%" class="txt2" name="order_id">
-		            <option value="">-- All Orders --</option>
-					{section name=i loop=$all}
-					<option {if $all[i].adv_id  == $order_id} selected="selected" {/if} value="{$all[i].adv_id}">#{$all[i].adv_id}</option>
-					{/section}
-		          </select>
-		          &nbsp; </div>
-		        <div class="third-box left">
-		          <select style="width: 80%" class="txt2" name="adv_id">
-		            <option value="">-- All Link Text --</option>
-					{section name=i loop=$all}
-					<option {if $all[i].adv_id  == $order_id} selected="selected" {/if} value="{$all[i].adv_id}">{$all[i].ad_des}</option>
-					{/section}
-		          </select>
-		          &nbsp; </div>
-		        <div class="third-box left"> <a onclick="$('link-filter').action = '{$_config.www}/links.php'; $('link-filter').submit(); return false;" href="#" class="btn-tan-80 left">View</a> <a onclick="$('link-filter').action = '{$_config.www}/export-excel.php'; $('link-filter').submit(); return false;" href="#" style="margin-left: 10px;" class="btn-tan-80 left">Export</a> </div>
-		        <div class="clear"></div>
-		      </div>		     
-		    </fieldset>
-		  </form>
-		  <div class="clear"></div>
-		 
-		  <form method="post" id="linkForm">
-		    <fieldset>
-			
-			  <input type="hidden" value="1" name="update" />
-		    </fieldset>		
-		  <h2 class="black">Regular Links</h2>
-		  <table class="data large" id="regular-link-table">
-			<thead>
-			<tr>
-			<th><a href="">Website Details</a></th>
-			<th style="width: 50px;"><a href="/account/links-advertiser/?action=links-advertiser&amp;status_id=ALL&amp;order_id=101875&amp;sort_regular=date_start&amp;order_regular=ASC">Ngày đặt</a></th>
-			<th style="width: 50px;"><a href="/account/links-advertiser/?action=links-advertiser&amp;status_id=ALL&amp;order_id=101875&amp;sort_regular=date_stop&amp;order_regular=ASC">Ngày hết hạn</a></th>
-			<th style="width: 35px;"><a href="/account/links-advertiser/?action=links-advertiser&amp;status_id=ALL&amp;order_id=101875&amp;sort_regular=link_score&amp;order_regular=ASC">PR</a></th>
-			<th style="width: 190px;"><a href="/account/links-advertiser/?action=links-advertiser&amp;status_id=ALL&amp;order_id=101875&amp;sort_regular=link_url&amp;order_regular=ASC">Link Details</a></th>
-			<th style="width: 55px;"><a href="/account/links-advertiser/?action=links-advertiser&amp;status_id=ALL&amp;order_id=101875&amp;sort_regular=order_link_regular.price&amp;order_regular=ASC">Giá/tháng</a></th>
-			<th style="width: 80px;" class="last"></th>
-			</tr>
-			</thead>
-			<tbody>
-			{section name=i loop=$ids}
-			<tr class="row1">
-			<td><strong>{$ids[i].websitename}</strong><br><span class="small grey">(<a href="{$all[i].url}" target="_blank">{$ids[i].url}</a>)</span><br>{$ids[i].description}</td>
-			<td class="alignleft">{$ids[i].buying_date}</td>
-			<td class="alignleft">{$ids[i].end_date}</td>
-			<td class="alignleft">{$ids[i].google_page_rank}</td>
-			<td class="alignleft">
-			<input type="hidden" value="{$ids[i].adv_id}" name="order_id" />
-			<input type="text" maxlength="35" size="30" value="{$ids[i].ad_des}" name="link_text" class="small txt2"><br>
-			<input type="text" maxlength="255" size="30" value="{$ids[i].ad_url}" name="link_url" class="small txt2"></td>
-			<td class="alignright large green bold">USD {$ids[i].price|number_format}</td>
-			<td class="centered last">{if $order_id>0}{if $ids[i].cancel  == 1} <a onclick="cancelLink(this, 'regular', {$all[i].adv_id}, {$all[i].pid}); return false;" href="#" class="btn-tan-80">Cancel</a> {else}<a href="#" class="btn-tan-80">Cancel</a> <a href="{$_config.www}/renew.php?id={$ids[i].adv_id}" class="btn-tan-80" style="margin-top: 5px;" href="#">Renew</a>{/if} {else}<a href="{$_config.www}/links.php?status_id=ALL&order_id={$ids[i].adv_id}" class="btn-tan-80">Quản Lý</a>{/if}</td>
-			</tr>
-			{/section}			
-			</tbody>
-			</table>
-		 </form>
-		  {$msg}
-		  {if $order_id>0}
-		  <a onclick="$('linkForm').submit(); return false;" href="{$_config.www}/links.php" class="btn-green-180 right">Cập Nhật Link</a>
-		  {/if}
-		  <div class="clear"></div>
-		</div>
+﻿<div class="wrapper paper">
+    <div class="container">
+        <div class="row">
+            {include file='left-menu.tpl'}
+            <div class="col-md-9 right-content-paper plus">
+                <div class="banner">
+                    <img src="{$template_dir}/images/ad.png">
+                </div>
+                <div class="right-inner">
+                    <h4 class="border-bold super-bold">Texlink đang chạy </h4>
+
+                    <div class="buylinkmanage">
+                        <div class="col-md-12">
+                            <div class="blog-tabs">
+                                <ul id="blog-tab" class="nav nav-tabs">
+                                    <li class=""><a href="#blmtab1" data-toggle="tab">Textlink chưa thanh toán</a></li>
+                                    <li class="active"><a href="#blmtab2" data-toggle="tab">Textlink đang chạy</a></li>
+                                    <li class=""><a href="#blmtab3" data-toggle="tab">Textlink hết hạn</a></li>
+                                    <li class=""><a href="#blmtab4" data-toggle="tab">Textlink đã hủy</a></li>
+                                    <li class=""><a href="#blmtab5" data-toggle="tab">Textlink đã dừng lại</a></li>
+                                    <li class=""><a href="#blmtab6" data-toggle="tab">Textlink bị từ chối</a></li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+
+                                    <div class="tab-pane fade in" id="blmtab1">
+                                        <form method="get" id="marketplaceFilter" class="form-horizontal">
+                                            <div class="control-group">
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="col-md-12 border-blue" name="keywords" value="Nhập từ khóa cần tìm 1" onfocus="updateTextFieldLabel(this, true, 'Nhập từ khóa cần tìm');" onblur="updateTextFieldLabel(this, false, 'Nhập từ khóa cần tìm');">
+
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12" id="filterCategory" name="category_id" size="1">
+                                                            <option label="-- All Categories --" value="0">-- Danh mục website --</option>
+                                                            <option value="35" label="Agriculture">Agriculture</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12" id="filterCategory" name="category_id" size="1">
+                                                            <option label="-- All Categories --" value="0">-- Danh mục website --</option>
+                                                            <option value="35" label="Agriculture">Agriculture</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" value="Mã textlink" onfocus="updateTextFieldLabel(this, true, 'Mã textlink');" onblur="updateTextFieldLabel(this, false, 'Mã textlink');" name="domain" class="col-md-12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12" id="filterCategory" name="category_id" size="1">
+                                                            <option label="-- All Categories --" value="0">-- Danh mục website --</option>
+                                                            <option value="35" label="Agriculture">Agriculture</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12" id="filterCategory" name="category_id" size="1">
+                                                            <option label="-- All Categories --" value="0">-- Danh mục website --</option>
+                                                            <option value="35" label="Agriculture">Agriculture</option>
+                                                        </select>
+                                                    </div>
+                                                    <label for="inputEmail3" class="col-sm-2 control-label"><strong>Hết hạn:</strong></label>
+                                                    <div class="col-md-2">
+                                                        <input type="text" value="Mã textlink" onfocus="updateTextFieldLabel(this, true, 'Mã textlink');" onblur="updateTextFieldLabel(this, false, 'Mã textlink');" name="domain" class="col-md-12">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" value="Mã textlink" onfocus="updateTextFieldLabel(this, true, 'Mã textlink');" onblur="updateTextFieldLabel(this, false, 'Mã textlink');" name="domain" class="col-md-12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-3 pull-left">
+                                                        <button class="button blue-bold">Tìm Kiếm</button>
+                                                    </div>
+                                                    <div class="col-md-9 pull-right">
+                                                        <div class="paging pull-right">
+                                                            <span>1</span>&nbsp;&nbsp;<a class="adminmenu" href="/buylink/marketplace.php?offset=10&amp;numrows=25&amp;">2</a> &nbsp;<a class="adminmenu" href="/buylink/marketplace.php?offset=20&amp;numrows=25&amp;">3</a> &nbsp;<a class="adminmenu" href="/buylink/marketplace.php?offset=10&amp;numrows=25&amp;"><i class="icon-next"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade active in" id="blmtab2">
+                                        <form method="get" id="marketplaceFilter" class="form-horizontal">
+                                            <div class="control-group">
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="col-md-12 border-blue" name="keywords" value="Nhập từ khóa cần tìm" onfocus="updateTextFieldLabel(this, true, 'Nhập từ khóa cần tìm');" onblur="updateTextFieldLabel(this, false, 'Nhập từ khóa cần tìm');">
+
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12" id="filterCategory" name="category_id" size="1">
+                                                            <option label="-- All Categories --" value="0">-- Danh mục website --</option>
+                                                            <option value="35" label="Agriculture">Agriculture</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12" id="filterCategory" name="category_id" size="1">
+                                                            <option label="-- All Categories --" value="0">-- Danh mục website --</option>
+                                                            <option value="35" label="Agriculture">Agriculture</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" value="Mã textlink" onfocus="updateTextFieldLabel(this, true, 'Mã textlink');" onblur="updateTextFieldLabel(this, false, 'Mã textlink');" name="domain" class="col-md-12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12" id="filterCategory" name="category_id" size="1">
+                                                            <option label="-- All Categories --" value="0">-- Danh mục website --</option>
+                                                            <option value="35" label="Agriculture">Agriculture</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12" id="filterCategory" name="category_id" size="1">
+                                                            <option label="-- All Categories --" value="0">-- Danh mục website --</option>
+                                                            <option value="35" label="Agriculture">Agriculture</option>
+                                                        </select>
+                                                    </div>
+                                                    <label for="inputEmail3" class="col-sm-2 control-label"><strong>Hết hạn:</strong></label>
+                                                    <div class="col-md-2">
+                                                        <input type="text" value="Mã textlink" onfocus="updateTextFieldLabel(this, true, 'Mã textlink');" onblur="updateTextFieldLabel(this, false, 'Mã textlink');" name="domain" class="col-md-12">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" value="Mã textlink" onfocus="updateTextFieldLabel(this, true, 'Mã textlink');" onblur="updateTextFieldLabel(this, false, 'Mã textlink');" name="domain" class="col-md-12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-3 pull-left">
+                                                        <button class="button blue-bold">Tìm Kiếm</button>
+                                                    </div>
+                                                    <div class="col-md-9 pull-right">
+                                                        <div class="paging pull-right">
+                                                            <span>1</span>&nbsp;&nbsp;<a class="adminmenu" href="/buylink/marketplace.php?offset=10&amp;numrows=25&amp;">2</a> &nbsp;<a class="adminmenu" href="/buylink/marketplace.php?offset=20&amp;numrows=25&amp;">3</a> &nbsp;<a class="adminmenu" href="/buylink/marketplace.php?offset=10&amp;numrows=25&amp;"><i class="icon-next"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="blmtab3">
+                                        <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Thông tin</th>
+                            <th>Textlink</th>
+                            <th>Trên trang</th>
+                            <th>Thời gian</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        {section name=i loop=$ids}
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <a href="http://localhost/buylink/view-site.php?pid=197" target="_blank">{$ids[i].websitename}n</a>
+                            </td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td width="13%">44 years 4 months</td>
+                            <td>0</td>
+
+                        </tr>
+                        {/section}
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
