@@ -461,7 +461,7 @@ function addToCart(btn, type, id, text, url, snippet)
 		onSuccess : function(resp) {
 			var data = resp.responseText.evalJSON();
 			btn.parentNode.parentNode.className = 'bought';
-			btn.parentNode.innerHTML = '<a class="add-cart" href="#" onclick="removeFromCartMarketplace(this, \''+type+'\', \''+data.id+'\', \''+id+'\', \''+text+'\', \''+url+'\', \''+snippet+'\'); return false;">Remove</a>';
+			btn.parentNode.innerHTML = '<a class="add-cart" href="#" onclick="removeFromCartMarketplace(this, \''+type+'\', \''+data.id+'\', \''+id+'\', \''+text+'\', \''+url+'\', \''+snippet+'\'); return false;">- Remove</a>';
 			updateCartLabels();
 
 			//var btnCart = $('btnViewCart');
@@ -490,7 +490,7 @@ function removeFromCartMarketplace(btn, type, id, itemId, text, url, snippet)
 		onSuccess : function(resp) {
 			var data = resp.responseText.evalJSON();
 			btn.parentNode.parentNode.className = '';
-			btn.parentNode.innerHTML = '<a href="#" onclick="addToCart(this, \''+type+'\', \''+itemId+'\', \''+text+'\', \''+url+'\', \''+snippet+'\'); return false;"><img src="'+base_url+'/templates/textlink/images/btn-add-cart.png" alt="Add to cart" /></a>';
+			btn.parentNode.innerHTML = '<a href="#" class="add-cart" onclick="addToCart(this, \''+type+'\', \''+itemId+'\', \''+text+'\', \''+url+'\', \''+snippet+'\'); return false;">+ Đặt mua</a>';
 			updateCartLabels();
 		},
 
