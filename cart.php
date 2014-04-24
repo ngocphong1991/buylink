@@ -16,16 +16,13 @@ $smarty->assign('cls_user', $cls_user);
 $totalPrice = $cls_publishersinfo->getTotalPrice();
 $yourMoney = $cls_user->getYourMoney();
 
-$smarty->assign('yourMoneyNum', $yourMoney);
-$smarty->assign('totalPriceNum', $totalPrice);
-
-
 $smarty->assign('yourMoney', my_money_format('%i',$yourMoney));
 $smarty->assign('yourMoneyStr', my_money_format('%i', $yourMoney));
 $smarty->assign('act', $_GET['act']);
 
 //@ case for coupon code submit
-if($_POST[promotion]!='Enter code here' && isset($_POST[promotion])){
+
+if($_POST['promotion']!='Enter code here' && isset($_POST['promotion'])){
 	require('classes/class_coupon.php'); $class_coupon = new Coupon();
 	$promotion = strip_tags(trim($_POST[promotion]));
 	 $all = $class_coupon->getAll("code='".$promotion."' AND start_date<=CURDATE() AND end_date>=CURDATE() AND status=1");
