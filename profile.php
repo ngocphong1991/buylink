@@ -10,26 +10,14 @@ require('classes/class_country.php'); $cls_country = new Country(); $smarty->ass
 require('classes/class_ref_user.php'); $cls_ref_user = new RefUser();
 require('classes/class_transection.php'); $cls_transection = new Transection(); $smarty->assign('cls_transection', $cls_transection);
 require('classes/class_payments.php'); $cls_payments = new Payments();
+require('classes/class_tracking.php'); $cls_tracking = new Tracking();
 
-$pm_type = $_POST['pm_type'];
-$method='';
-if($pm_type==2){
-	$method =' and method="paypal"';
-	$list_payments = $cls_payments->getAll('advid='.$_SESSION['uid'].$method.'');
-
-}elseif($pm_type==3){
-	$method =' or method="Card"';
-	$list_payments = $cls_payments->getAll('advid='.$_SESSION['uid'].$method.'');
-
-}elseif($pm_type==4){
-	require('classes/class_session_pay.php'); $cls_session_pay = new SessionPay();
-	$list_payments = $cls_session_pay->getAll('uid='.$_SESSION['uid'].'');
-
-	$smarty->assign('pm_type', 4);
+if(isset($_GET['page']) && $_GET['page'] = 'history'){
+    $cls_tracking = $cls_tracking->getAll('uid='.$_SESSION['uid']);
 }
 
 $smarty->assign('genders',getGenders());
-$smarty->assign('list_payments',$list_payments);
+$smarty->assign('cls_tracking',$cls_tracking);
 $pending_money = $cls_advertisersinfo->getPendingMoney();
 $smarty->assign('pending_money',$pending_money);
 

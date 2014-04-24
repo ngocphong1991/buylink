@@ -1,27 +1,16 @@
-<div id="maininner">
-		  <h1><a href="browse.php" class="style27">{$_lang.Order_Confirmation}</a></h1>
-				
-			<h1 align="right">&nbsp;</h1>
-    <div class="splitleft">
-              <div class="box">			  
-			  {$text}
-                <table width="100%" border="0" align="center">                                 
-                  <tr>
-                    <td>
-                    
-                    </td>
-					 <td>
-                    
-                    </td>
-                  </tr>
-				  
-                  <tr>
-                    <td><a id="btnSubmitWebsite1" class="btn-green-80" style="margin-top: 12px;; float:right" href="{$_config.www}/cart/" >Cart</a></td> 
-					 <td><a id="btnSubmitWebsite1" class="btn-green-80" style="margin-top: 12px;" href="{$_config.www}/payment/" >Nạp tiền</a></td>
-                  </tr>          
-                 
-                </table>
+<div class="wrapper paper">
+    <div class="container">
+        <div class="row">
+            {include file='left-menu.tpl'}
+            <div class="col-md-9 right-content-paper plus">
+                <div class="banner">
+                    <img src="{$template_dir}/images/ad.png">
+                </div>
+                <div class="right-inner">
+                    <h4 class="border-bold">Nạp tiền</h4>
+                    {if isset($text)}<div class="alert alert-info">{$text}</div>{/if}
+                </div>
+            </div>
         </div>
     </div>
-			{$TIP}
-	  </div>
+</div>
