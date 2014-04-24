@@ -1,10 +1,17 @@
+<?php /* Smarty version 2.6.18, created on 2014-04-24 06:19:08
+         compiled from links.tpl */ ?>
 ﻿<div class="wrapper paper">
     <div class="container">
         <div class="row">
-            {include file='left-menu.tpl'}
+            <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => 'left-menu.tpl', 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
             <div class="col-md-9 right-content-paper plus">
                 <div class="banner">
-                    <img src="{$template_dir}/images/ad.png">
+                    <img src="<?php echo $this->_tpl_vars['template_dir']; ?>
+/images/ad.png">
                 </div>
                 <div class="right-inner">
                     <h4 class="border-bold super-bold">Texlink đang chạy </h4>
@@ -392,7 +399,8 @@
                         <tr>
                             <td>1</td>
                             <td>
-                                <a href="http://localhost/buylink/view-site.php?pid=197" target="_blank">{$ids[i].websitename}n</a>
+                                <a href="http://localhost/buylink/view-site.php?pid=197" target="_blank"><?php echo $this->_tpl_vars['ids'][$this->_sections['i']['index']]['websitename']; ?>
+n</a>
                             </td>
                             <td>0</td>
                             <td>0</td>
@@ -403,7 +411,8 @@
                         <tr>
                             <td>1</td>
                             <td>
-                                <a href="http://localhost/buylink/view-site.php?pid=197" target="_blank">{$ids[i].websitename}n</a>
+                                <a href="http://localhost/buylink/view-site.php?pid=197" target="_blank"><?php echo $this->_tpl_vars['ids'][$this->_sections['i']['index']]['websitename']; ?>
+n</a>
                             </td>
                             <td>0</td>
                             <td>0</td>
@@ -414,7 +423,8 @@
                         <tr>
                             <td>1</td>
                             <td>
-                                <a href="http://localhost/buylink/view-site.php?pid=197" target="_blank">{$ids[i].websitename}n</a>
+                                <a href="http://localhost/buylink/view-site.php?pid=197" target="_blank"><?php echo $this->_tpl_vars['ids'][$this->_sections['i']['index']]['websitename']; ?>
+n</a>
                             </td>
                             <td>0</td>
                             <td>0</td>

@@ -2,7 +2,6 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include "include/config.php";
-
 $user_refer = isset($_GET[ref])?addslashes($_GET[ref]):'';
 if($user_refer) $_SESSION[ref] = $user_refer;
 $tmp = $_SERVER['PHP_SELF'];

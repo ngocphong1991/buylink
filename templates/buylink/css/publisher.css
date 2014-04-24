@@ -229,5 +229,22 @@
     background: url("../images/bg-table-top.png") repeat-x;
 }
 
+/*
+================================================ website like =============================================================
+=======================================================================================================================
+*/
 
+.weblike form div.col-md-3{
+    width: 20%;
+    padding-left: 0px;
+}
 
+.weblike form div.form-group{
+    margin-left: 0px;
+}
+.weblike form div.col-md-6{
+    padding-left: 0px;
+}
+.weblike div.wldanhmuc{
+    color: ;
+}

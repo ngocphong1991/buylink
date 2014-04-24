@@ -26,8 +26,9 @@ RewriteRule ^buyarelink/?$ buyarelink.php
 #RewriteRule ^buyalinkthanhtoan/?$ buyalinkthanhtoan.php
 #RewriteRule ^buylinkmanage/?$ buylinkmanage.php
 
-RewriteRule ^manage-article-link/?$ manage-article-link.php
+RewriteRule ^managearticlelink/?$ manage-article-link.php
 RewriteRule ^manage-group-buylink/?$ manage-group-buylink.php
+RewriteRule ^weblike/?$ weblike.php
 
 
 #End Thang update
