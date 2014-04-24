@@ -14,11 +14,11 @@ Keywords: textlink, backlinks, seo, sem, internet marketing, online marketing, t
 
     <!-- Bootstrap core CSS -->
     <link href="{$template_dir}/css/bootstrap.css" rel="stylesheet">
-    
+
     <!-- Thang update -->
     <link href="{$template_dir}/css/publisher.css" rel="stylesheet">
     <script src="{$template_dir}/ckeditor/ckeditor.js" language="javascript"></script>
-    
+
     <!-- End Thang update -->
 
     <script src="{$template_dir}/js/jquery.min.js"></script>

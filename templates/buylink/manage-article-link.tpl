@@ -7,7 +7,7 @@
                     <img src="{$template_dir}/images/ad.png">
                 </div>
                 <div class="right-inner">
-                    <h4 class="border-bold super-bold">Texlink đang chạy </h4>
+                    <h4 class="border-bold super-bold">Quản lý article link </h4>
                     <div class="weblike">
                         <form method="get" id="marketplaceFilter" class="form-horizontal">
                             <div class="control-group">

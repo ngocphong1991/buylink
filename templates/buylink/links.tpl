@@ -65,6 +65,7 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <input type="text" value="Mã textlink" onfocus="updateTextFieldLabel(this, true, 'Mã textlink');" onblur="updateTextFieldLabel(this, false, 'Mã textlink');" name="domain" class="col-md-12">
+
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
