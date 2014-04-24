@@ -23,8 +23,12 @@ RewriteRule ^marketplace/?$ marketplace.php
 #Thang update
 RewriteRule ^buyalink/?$ buyalink.php
 RewriteRule ^buyarelink/?$ buyarelink.php
-RewriteRule ^buyalinkthanhtoan/?$ buyalinkthanhtoan.php
-RewriteRule ^buylinkmanage/?$ buylinkmanage.php
+#RewriteRule ^buyalinkthanhtoan/?$ buyalinkthanhtoan.php
+#RewriteRule ^buylinkmanage/?$ buylinkmanage.php
+
+RewriteRule ^manage-article-link/?$ manage-article-link.php
+RewriteRule ^manage-group-buylink/?$ manage-group-buylink.php
+
 
 #End Thang update
 
