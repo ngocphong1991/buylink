@@ -36,6 +36,8 @@
 		<li><a href="../admin/admin.php"><strong>Admin manage </strong></a></li>
 		
 	    <li><a href="../admin/?pass"><strong>Admin Password </strong></a></li>
+
+        <li><a href="../admin/config.php"><strong>Configuration </strong></a></li>
 		
         <li><a href="../admin/?logout"><strong>Logout</strong></a></li>
       </ul>

@@ -11,6 +11,7 @@
                     <h4 class="border-bold">Nạp tiền</h4>
                     <div class="alert alert-success">Thanh toán trực tuyến an toàn dùng tài khoản ngân hàng (VietComBank, TechComBank, Đông Á, VIB, SHB, VietinBank,...) và thẻ quốc tế (Visa, Master...) qua ví điện tử NgânLượng.vn, ĐÃ ĐƯỢC NGÂN HÀNG NHÀ NƯỚC CẤP PHÉP!</div>
                     <form class="form-horizontal" method="post" action="" id="payment" name="payment">
+                        {if $msg}<div class="alert alert-danger">{$msg}</div>{/if}
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="amount">Số tiền nạp (USD)</label>
