@@ -45,6 +45,16 @@ if($_POST['action']=='update_info') {
             }
         }
     }
+
+    if (!file_exists('uploads/avatars'))
+        mkdir('uploads/avatars');
+    if ($_FILES["avatar"]["name"] != null) {
+        $newFile = "avatar_" . $_FILES["avatar"]['size'] . "_" . time('now') . "." . substr($_FILES["avatar"]["name"], strrpos($_FILES["avatar"]["name"], '.') + 1);
+        move_uploaded_file($_FILES["avatar"]["tmp_name"], "uploads/avatars/" . $newFile);
+        unlink($myProfile['avatar']);
+        $value .= ", avatar = '".$_config['www']."/uploads/avatars/".$newFile."'";
+    }
+
     if($cls_user->updateOne($myProfile['uid'], $value)) {
         $msg_profile = 'Your info has been changed';
     }
