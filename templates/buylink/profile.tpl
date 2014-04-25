@@ -194,53 +194,28 @@
                     {elseif $page == 'history'}
                         <!-- START PROFILE HISTORY PAGE-->
                         <h4 class="border-bold">Lịch sử giao dịch</h4>
-                        {if isset($msg_profile)}<div class="message-error">{$msg_profile}</div>{/if}
-                        <div class="row">
-                            <form id="filter_form" class="form-horizontal" enctype="multipart/form-data" method="post" action="">
-                                <div>
-                                    <div>
-                                        <select name="pm_type" class="col-md-2">
-                                            <!--<option value="1">Thẻ điện thoại</option> -->
-                                            <option value="2">Paypal</option>
-                                            <option value="3" selected="selected">ATM</option>
-                                            <option value="4">Trực tiếp</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a id="btnSearchSubmit" class="button gray" href="#" onclick="jQuery('#filter_form').submit();">Submit</a>
-                                    </div>
-                                </div>
-                                <input type="hidden" value="payments" name="act">
-                            </form>
-                        </div>
+                        {if $cls_tracking && count($cls_tracking)}
                         <table class="table" style="margin-top: 30px">
                             <tbody>
                             <tr class="info">
                                 <td><b>#</b></td>
                                 <td><b>Số Tiền</b></td>
                                 <td><b>Ngày Nạp</b></td>
-                                <td><b>Phương Thức</b></td>
                                 <td><b>Tình Trạng</b></td>
                             </tr>
-                            {section name=i loop=$list_payments}
+                            {section name=i loop=$cls_tracking}
                                 <tr>
-                                    {if $pm_type==4}
-                                        <td><strong>{$list_payments[i].session_pay_id}</strong></td>
-                                        <td>USD {$list_payments[i].money}</td>
-                                        <td>{$list_payments[i].reg_date|date_format:"%D"}</td>
-                                        <td>{$list_payments[i].type}</td>
-                                        <td>Completed</td>
-                                    {else}
-                                        <td><strong>{$list_payments[i].id}</strong></td>
-                                        <td>USD {$list_payments[i].payment_amount}</td>
-                                        <td>{$list_payments[i].payment_time|date_format:"%D"}</td>
-                                        <td>{$list_payments[i].method}</td>
-                                        <td> {$list_payments[i].payment_status}</td>
-                                    {/if}
+                                    <td>{$smarty.section.i.index+1}</td>
+                                    <td>{$cls_tracking[i].amount} {$cls_tracking[i].currency_char}</td>
+                                    <td>{$cls_tracking[i].date_order|date_format:"%D"}</td>
+                                    <td>{if $cls_tracking[i].error_text != ''}{$cls_tracking[i].error_text}{else}Thành công{/if}</td>
                                 </tr>
                             {/section}
                             </tbody>
                         </table>
+                        {else}
+                            <div class="alert alert-danger">Bạn chưa từng nạp tiền vào tài khoản</div>
+                        {/if}
                         <!-- END PROFILE HISTORY PAGE-->
                     {elseif $page == 'money'}
                         <!-- START PROFILE MONEY PAGE-->
