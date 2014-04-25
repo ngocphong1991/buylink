@@ -22,7 +22,7 @@
             <li class="menu-level-1">
                 <h5>Quảng lý quảng cáo</h5>
                 <ul>
-                    <li {if $module_name == 'links'}class="menu-active"{/if}><a href="{$_config.www}/links-advertiser" title="Quản lý Buylink">Quản lý Buylink</a></li>
+                    <li {if $module_name == 'links'}class="menu-active"{/if}><a href="{$_config.www}/links" title="Quản lý Buylink">Quản lý Buylink</a></li>
 
                     <li {if $module_name == 'managearticlelink'}class="menu-active"{/if}><a href="{$_config.www}/managearticlelink" title="Quản lý Buylink">Quản lý Article Link</a></li>
                     <li {if $module_name == 'manage-group-buylink'}class="menu-active"{/if}><a href="{$_config.www}/manage-group-buylink" title="Quản lý Nhóm Buylink">Quản lý Nhóm Buylink</a></li>

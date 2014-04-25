@@ -2,29 +2,51 @@
 include ("include/config.php");
 $msg = "";
 $userId = intval($_SESSION[uid]);
-if(!isset($_SESSION[uid])){	
-	header("location: ".$_config[www]."/account.php");			
+if(!isset($_SESSION[uid])){
+	header("location: ".$_config[www]."/account.php");
 	exit();
 }
+
+if($_POST){
+    echo 'da posst';
+}
+
 
 $order_id = isset($_GET[order_id])?intval($_GET[order_id]):0;
 $adv_id = isset($_GET[adv_id])?intval($_GET[adv_id]):0;
 $export_cls = isset($_GET[type])?$_GET[type]:'';
 $status_id = isset($_GET[status_id])?$_GET[status_id]:'';
+$smarty->assign('_session',$_SESSION);
 
-$smarty->assign('_session',$_SESSION); 
-if($status_id){
+$buying_date = $_GET['buying_date'];
+$end_date = $_GET['end_date'];
+$adv_id = $_GET['adv_id'];
+$tabactive = $_GET['tabactive'];
+$edit = $_GET['edit'];
+
+
+$smarty->assign('buying_date',$buying_date);
+$smarty->assign('end_date',$end_date);
+$smarty->assign('tabactive',$tabactive);
+if(isset($edit) && $edit)
+    $smarty->assign('edit',$edit);
+
+if($_GET['keywords']!='Nhập từ khóa cần tìm' && $_GET['keywords']!='')   {
+    $keywords = $_GET['keywords'];
+    $smarty->assign('keywords',$keywords);
+}
+
 	if($order_id<=0 && $adv_id>0) $order_id = $adv_id;
 	require('classes/class_advertisersinfo.php');
 	$cls_advertisersinfo = new Advertisersinfo();
 	
 	if(isset($order_id) && $order_id>0){ $where = 'adv_id = '.$order_id; } else $where = 'is_paid="Y"';
 	
-	if(isset($_POST[update]) && $_POST[link_text] && ($_POST[order_id]>0)){
-		$key = $_POST[order_id];
-		$value = "ad_des='".stripslashes($_POST['link_text'])."'";
-		if($_POST['link_url'])
-		$value .= ",ad_url='".stripslashes($_POST['link_url'])."'";
+	if(isset($_GET[update]) && $_GET[link_text] && ($_GET[order_id]>0)){
+		$key = $_GET[order_id];
+		$value = "ad_des='".stripslashes($_GET['link_text'])."'";
+		if($_GET['link_url'])
+		$value .= ",ad_url='".stripslashes($_GET['link_url'])."'";
 		$value .= ",update_time='".time()."'";
 		//$value .= ",ad_url='".$val['ad_url']."'";
 		$advertiser_info = $cls_advertisersinfo->getOne($key);
@@ -34,32 +56,47 @@ if($status_id){
 			 $msg = '<span style="color:geen">Update successful.</span>' ;
 		}
 	}
-	$all = getListOrder($order_id, $userId);
+	$all = getListOrder($order_id, $userId,$buying_date,$end_date,$keywords,'active');
+    $allexpire = getListOrder($order_id, $userId,$buying_date,$end_date,$keywords,'expire');
 
-//   echo '<pre>';
-//    print_r($all);
-//    echo '<pre>';
 	if($export_cls) export_excel($all[all]);
 	
 	$where .=  ' and uid = '.$userId;
-	
-	//$all = $cls_advertisersinfo->getAll($where);
-$smarty->assign('msg', $msg);
-$smarty->assign('order_id', $order_id);
-$smarty->assign('ids', $all[ids]);
-$smarty->assign('all', $all[all]);
-$content = $smarty->fetch('links.tpl');
-}else{
-	$content = $smarty->fetch('links-home.tpl');
-}
 
-function getListOrder($adv_id=0, $userId){
+//echo '<pre>';
+//print_r($all[ids]);
+//echo '<pre>';
+
+
+	//$all = $cls_advertisersinfo->getAll($where);
+    $smarty->assign('msg', $msg);
+    $smarty->assign('order_id', $order_id);
+    $smarty->assign('ids', $all[ids]);
+    $smarty->assign('all', $all[all]);
+    $smarty->assign('idsexpire', $allexpire[ids]);
+    $smarty->assign('allexpire', $allexpire[all]);
+
+    $content = $smarty->fetch('links.tpl');
+
+function getListOrder($adv_id=0, $userId,$buying_date,$end_date,$keywords,$status=''){
 $list_arr = array();
 	$tlwhere =" WHERE publishersinfo.status = 2 and advertisersinfo.uid =".$userId."  and advertisersinfo.is_paid='Y' ";
-if($adv_id>0) 
+if($adv_id>0)
 	$tlwhere .= " AND advertisersinfo.adv_id = ".$adv_id." ";
+if(isset($buying_date) and $buying_date and isset($end_date) and $end_date){
+    $tlwhere .= " AND ( (`buying_date` BETWEEN '$buying_date' AND '$end_date') OR  (`end_date` BETWEEN '$buying_date' AND '$end_date')) ";
+}
+if(isset($status) and $status == 'expire'){
+    $tlwhere .= " AND ( `buying_date` < CURDATE( ) AND  `end_date` <  CURDATE( ) ) ";
 
+}
+if(isset($status) and $status == 'active'){
+    $tlwhere .= " AND ( `buying_date` <= CURDATE( ) ) AND  (`end_date` >=  CURDATE( ) ) ";
+}
 
+if(isset($keywords) and $keywords){
+    $tlwhere .= " AND (advertisersinfo.ad_des like '%$keywords%' or advertisersinfo.ad_url like '%$keywords%')";
+}
 $list_order = mysql_query("select publishersinfo.pid, publishersinfo.url, publishersinfo.websitename,publishersinfo.google_page_rank, publishersinfo.description, advertisersinfo.price, advertisersinfo.adv_id, advertisersinfo.ad_des, advertisersinfo.buying_date,advertisersinfo.end_date, advertisersinfo.ad_url from publishersinfo LEFT JOIN (advertisersinfo) ON (advertisersinfo.pid=publishersinfo.pid) ".$tlwhere." order by advertisersinfo.adv_id DESC ");
 
 	while($r = @mysql_fetch_assoc($list_order)) {
