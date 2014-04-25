@@ -15,13 +15,14 @@
                 <h5>Công cụ SEO</h5>
                 <ul>
                     <li><a href="#" title="BUYLINK SEO APP">BUYLINK SEO APP</a></li>
-                    <li><a href="#" title="KT thứ hạng từ khóa">KT thứ hạng từ khóa</a></li>
+                    <li {if $module_name == 'checklevel'}class="menu-active"{/if}><a href="{$_config.www}/checklevel" title="KT thứ hạng từ khóa">KT thứ hạng từ khóa</a></li>
+
                 </ul>
             </li>
             <li class="menu-level-1">
                 <h5>Quảng lý quảng cáo</h5>
                 <ul>
-                    <li {if $module_name == 'links'}class="menu-active"{/if}><a href="{$_config.www}/links-advertiser" title="Quản lý Buylink">{$module_name}Quản lý Buylink</a></li>
+                    <li {if $module_name == 'links'}class="menu-active"{/if}><a href="{$_config.www}/links-advertiser" title="Quản lý Buylink">Quản lý Buylink</a></li>
 
                     <li {if $module_name == 'managearticlelink'}class="menu-active"{/if}><a href="{$_config.www}/managearticlelink" title="Quản lý Buylink">Quản lý Article Link</a></li>
                     <li {if $module_name == 'manage-group-buylink'}class="menu-active"{/if}><a href="{$_config.www}/manage-group-buylink" title="Quản lý Nhóm Buylink">Quản lý Nhóm Buylink</a></li>

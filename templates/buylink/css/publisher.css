@@ -154,9 +154,6 @@
     text-align: right;
 }
 
-
-
-
 .buyarelink table tr td:first-child{   
     font-weight: bold;
     text-align: right;
@@ -188,7 +185,7 @@
 }
 
 /*
-================================================quan l� text link=============================================================
+================================================quan lý text link=============================================================
 =======================================================================================================================
 */
 .buylinkmanage div.col-md-12{
@@ -219,8 +216,7 @@
     
 }
 .buylinkmanage label.col-sm-2{
-    width: 8%;
-    padding-right: 0px;
+    width: 11%;
     padding-left: 0px;
     text-align: left;
 }
@@ -247,4 +243,19 @@
 }
 .weblike div.wldanhmuc{
     color: ;
+}
+.checklevel{
+     border: 1px solid #CCCCCC;
+     border-radius:10px;
+     height: 100px;
+     margin-top: 20px;
+     margin-left: 30px;
+     padding-top: 10px;
+     padding-left: 30px;
+ }
+.checklevel p{
+    margin-left: 20px;
+}
+.links{
+    font-size: 13px;
 }

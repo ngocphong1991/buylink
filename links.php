@@ -35,6 +35,10 @@ if($status_id){
 		}
 	}
 	$all = getListOrder($order_id, $userId);
+
+//   echo '<pre>';
+//    print_r($all);
+//    echo '<pre>';
 	if($export_cls) export_excel($all[all]);
 	
 	$where .=  ' and uid = '.$userId;
@@ -54,8 +58,11 @@ $list_arr = array();
 	$tlwhere =" WHERE publishersinfo.status = 2 and advertisersinfo.uid =".$userId."  and advertisersinfo.is_paid='Y' ";
 if($adv_id>0) 
 	$tlwhere .= " AND advertisersinfo.adv_id = ".$adv_id." ";
+
+
 $list_order = mysql_query("select publishersinfo.pid, publishersinfo.url, publishersinfo.websitename,publishersinfo.google_page_rank, publishersinfo.description, advertisersinfo.price, advertisersinfo.adv_id, advertisersinfo.ad_des, advertisersinfo.buying_date,advertisersinfo.end_date, advertisersinfo.ad_url from publishersinfo LEFT JOIN (advertisersinfo) ON (advertisersinfo.pid=publishersinfo.pid) ".$tlwhere." order by advertisersinfo.adv_id DESC ");
-	while($r = @mysql_fetch_assoc($list_order)) {		
+
+	while($r = @mysql_fetch_assoc($list_order)) {
 			$r[cancel] = 0;
 			if(date("Y-m-d")==$r[buying_date])
 				$r[cancel]=1;

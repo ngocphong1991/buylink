@@ -24,7 +24,7 @@ RewriteRule ^marketplace/?$ marketplace.php
 RewriteRule ^buyalink/?$ buyalink.php
 RewriteRule ^buyarelink/?$ buyarelink.php
 #RewriteRule ^buyalinkthanhtoan/?$ buyalinkthanhtoan.php
-#RewriteRule ^buylinkmanage/?$ buylinkmanage.php
+RewriteRule ^checklevel/?$ checklevel.php
 
 RewriteRule ^managearticlelink/?$ manage-article-link.php
 RewriteRule ^manage-group-buylink/?$ manage-group-buylink.php
