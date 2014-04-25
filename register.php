@@ -5,8 +5,38 @@ include "include/config.php";
 include "global.php";
 require_once('classes/class_country.php'); $cls_country = new Country(); $smarty->assign('cls_country', $cls_country);
 $msg =array();
+$msg_quick = array();
+if(isset($_POST['quick-register']) && $_POST['quick-register'] == 1){
+    if($_POST['email']!='' && $_POST['email']){
+        $email_valid = isValid($_POST['email'], 'email');
+        if($email_valid==1) $msg_quick['email'] = "The email had exist.";
+        elseif($email_valid==2)
+            $_SESSION['email'] = $_POST['email'];
+        else $msg_quick['email'] = "The email not format correct";
+    }else $msg_quick['email'] = "Please enter your email";
 
-if(isset($_POST) && count($_POST)){
+    if($_POST['username']!='' && $_POST['username']){
+        if(strlen($_POST['username'])<4) $msg_quick['username'] = "The username must be at least 4 characters.";
+        $username_valid = isValid($_POST['username'], 'username');
+        if($username_valid==1) $msg_quick['username'] = "The username had exist";
+        elseif($username_valid==2)
+            $_SESSION['username'] = $_POST['username'];
+        else $msg_quick['username'] = "The username not format correct";
+    }else $msg_quick['username'] = "Please enter your username";
+
+    if(count($msg_quick)==0){
+        if(quick_register_new_user($_POST)){
+            login(trim($_POST['username']), $_POST['password']);
+            header('Location: '.$_config['wwww'].'profile');
+        }
+    }else{
+        foreach($msg_quick as $err_mess){
+            $mess .= '<p><span>'.$err_mess.'</span></p>';
+            $smarty->assign('msg_quick',$mess);
+        }
+    }
+}
+elseif(isset($_POST) && count($_POST)){
 	if($_POST['email']!='' && $_POST['email']){
 		$email_valid = isValid($_POST['email'], 'email');
 		if($email_valid==1) $msg['email'] = "The email had exist.";

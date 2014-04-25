@@ -12,7 +12,7 @@ require('classes/class_transection.php'); $cls_transection = new Transection(); 
 require('classes/class_payments.php'); $cls_payments = new Payments();
 require('classes/class_tracking.php'); $cls_tracking = new Tracking();
 
-if(isset($_GET['page']) && $_GET['page'] = 'history'){
+if(isset($_GET['page']) && $_GET['page'] == 'history'){
     $cls_tracking = $cls_tracking->getAll('uid='.$_SESSION['uid']);
 }
 

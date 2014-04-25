@@ -4,7 +4,7 @@ include_once("global.php");
 include_once("payments/NL.php");
 
 if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['amount'] && is_numeric($_POST['amount'])){
-    $nl = new NL;
+    $nl = new NL($_config['merchant_site_code'], $_config['secure_pass']);
     //Define infomation order
     $receiver = $_config['account_nganluong'];
     $return_url = $_config['www'].'success.php';
@@ -14,6 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['amount'] && is_numeric($_POST['
     $currency = $_config['currency_char'];
     //Create Ngan Luong url
     $url= $nl->buildCheckoutUrlExpand($return_url, $receiver, $transaction_info, $order_code, $price, $currency);
+
     if($url){
         if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) echo '<script>location=\''.$url.'\'</script>';
         else  echo '<script type"javascripts">location.href=\''.$url.'\'</script>';

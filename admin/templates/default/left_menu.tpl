@@ -25,11 +25,7 @@
   
         <li><a href="../admin/pay_rates.php?rates"><strong>Pay Rates </strong></a></li>
         
-        <li><a href="../admin/bank.php"><strong>Bank</strong></a></li>
-        
-        <li><a href="../admin/pay-card.php"><strong>Pay Card</strong></a></li>
-        
-        <li><a href="../admin/pay-direct.php"><strong>Pay Direct</strong></a></li>
+        <li><a href="../admin/tracking_order.php"><strong>Payment</strong></a></li>
         
         <li><a href="../admin/user.php"><strong>User Manage</strong></a></li>
 	  
