@@ -1,4 +1,4 @@
-﻿<div class="wrapper paper">
+<div class="wrapper paper">
     <div class="container">
         <div class="row">
             {include file='left-menu.tpl'}
