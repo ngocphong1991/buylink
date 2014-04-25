@@ -14,7 +14,7 @@ require('classes/class_coupon_card.php'); $cls_coupon_card = new Coupon();
 
 if($_SESSION['uid'] == '') header('location: '.$_config[www]);
 $msn='';
-if($_POST['charge']=='1'){	
+if($_POST['charge']=='1'){
 	if($_SESSION[uid]>0)
 		$one = $cls_user->getOne($_SESSION[uid]);
 		
@@ -43,5 +43,5 @@ if($_POST['charge']=='1'){
 
 $content = $smarty->fetch('admoney_card.tpl');
 $smarty->assign('content',$content);
-$smarty->display('master_static.tpl');
+$smarty->display('master_page.tpl');
 ?>

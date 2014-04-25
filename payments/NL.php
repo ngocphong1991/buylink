@@ -11,14 +11,18 @@ class NL {
 	private $nganluong_url = 'https://www.nganluong.vn/checkout.php';
 	
 	// Mã website của bạn đăng ký trong chức năng tích hợp thanh toán của NgânLượng.vn.
-	private $merchant_site_code = '31062'; //100001 chỉ là ví dụ, bạn hãy thay bằng mã của bạn
+	private $merchant_site_code; //100001 chỉ là ví dụ, bạn hãy thay bằng mã của bạn
 
 	// Mật khẩu giao tiếp giữa website của bạn và NgânLượng.vn.
-	private $secure_pass= 'Phong@123'; //d685739bf1 chỉ là ví dụ, bạn hãy thay bằng mật khẩu của bạn
+	private $secure_pass; //d685739bf1 chỉ là ví dụ, bạn hãy thay bằng mật khẩu của bạn
 	// Nếu bạn thay đổi mật khẩu giao tiếp trong quản trị website của chức năng tích hợp thanh toán trên NgânLượng.vn, vui lòng update lại mật khẩu này trên website của bạn
 	
 	private $affiliate_code = ''; //Mã đối tác tham gia chương trình liên kết của NgânLượng.vn
-	
+
+    public function __construct($merchant_site_code = '', $secure_pass = ''){
+        $this->merchant_site_code = $merchant_site_code;
+        $this->secure_pass = $secure_pass;
+    }
 	
 	/**
 	 * HÀM TẠO ĐƯỜNG LINK THANH TOÁN QUA NGÂNLƯỢNG.VN VỚI THAM SỐ MỞ RỘNG

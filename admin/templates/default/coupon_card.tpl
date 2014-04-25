@@ -1,6 +1,6 @@
 ﻿	<div id="main">
       <h1><a href="../admin/" class="style27">{$_lang.Admin} {$_lang.control_panel}</a></h1>
-      <table width="100%" border="0">        
+      <table width="100%" border="0">
         <tr>
           <td class="style39"><h1><span class="green">Advertisersinfo Manager</span></h1></td>
         </tr>
@@ -9,74 +9,74 @@
         <td> Add coupon TextLink Card for:<b> {$cls_user->getUserName($smarty.get.uid)} </b>  </td>
         </tr>
         {/if}
-      </table>	  
-      <table width="100%" border="0" align="center" style="min-width: 879px">        
+      </table>
+      <table width="100%" border="0" align="center" style="min-width: 879px">
         <tr>
-          <td width="100%"><div class="splitleft">		  
+          <td width="100%"><div class="splitleft">
             <div class="box">
               <div align="left">
 			  <form action="" method="post" name="frm_coupon">
-				<input type="hidden" value="1" name="gen_code" />		             
-				<input style="float:right" type="submit" value="Gen code" />	
-			  </form>			  
+				<input type="hidden" value="1" name="gen_code" />
+				<input style="float:right" type="submit" value="Gen code" />
+			  </form>
 			     <form action="" method="get" name="frm_coupon">
                  <div class="frm_search" style="padding: 20px 0; text-align: center; background: #fff">
                     <label>Code </label>
                     <input type="text" name="keyword" value="{$keyword}" />
-                    <label>Active</label>                 
-                    <input type="submit" value="Find" />					
+                    <label>Active</label>
+                    <input type="submit" value="Find" />
                  </div>
                     <table  class="tbl-list"  id="lst-submit-url">
-                    <tr style="font-weight: bold">					
-				    <td align="center">Total Money</td>					
-				    <td align="center">User Time</td>						
-				    <td align="center">Code</td>			
+                    <tr style="font-weight: bold">
+				    <td align="center">Total Money</td>
+				    <td align="center">User Time</td>
+				    <td align="center">Code</td>
 				    <td align="center">Status</td>
                     <td align="center">Used</td>
                     <td align="center">For User</td>
                     </tr>
                     {section name=i loop=$all_coupon}
-                    <tr>                                
-                        <td align="center">{$all_coupon[i].total}</td>                      	
+                    <tr>
+                        <td align="center">{$all_coupon[i].total}</td>
 						<td align="center">{$all_coupon[i].use_time}</td>
-						<td align="center">{$all_coupon[i].ref_code}</td>				
-						<td>{if $all_coupon[i].status == '0'} Pending <a href="?confirm={$all_coupon[i].coupon_card_id}&type=yes" class="smart-btn btn-openfrm btn-pay-atm-conf-yes">Active now</a>{else} Actived 	<a href="?confirm={$all_coupon[i].coupon_id}&type=no" class="smart-btn btn-openfrm btn-pay-atm-conf-no">inactive</a>{/if} <a href="?confirm={$all_coupon[i].coupon_id}&type=delete" class="smart-btn btn-openfrm btn-pay-atm-conf-yes">Del</a></td>                     					
+						<td align="center">{$all_coupon[i].ref_code}</td>
+						<td>{if $all_coupon[i].status == '0'} Pending <a href="?confirm={$all_coupon[i].coupon_card_id}&type=yes" class="smart-btn btn-openfrm btn-pay-atm-conf-yes">Active now</a>{else} Actived 	<a href="?confirm={$all_coupon[i].coupon_id}&type=no" class="smart-btn btn-openfrm btn-pay-atm-conf-no">inactive</a>{/if} <a href="?confirm={$all_coupon[i].coupon_id}&type=delete" class="smart-btn btn-openfrm btn-pay-atm-conf-yes">Del</a></td>
 
 						<td align="center">
-                        {if $all_coupon[i].user_id>0} 
+                        {if $all_coupon[i].user_id>0}
 						{$cls_user->getUserName($all_coupon[i].user_id)}
-                        {/if} 
-						</td>       			
-                       
+                        {/if}
+						</td>
+
                          <td align="center">
-                       {if $all_coupon[i].for_uid>0} 
+                       {if $all_coupon[i].for_uid>0}
                         {$cls_user->getUserName($all_coupon[i].for_uid)}
-                        {/if} 
+                        {/if}
                         </td>
-                       
-				   </tr>                 
+
+				   </tr>
                     {/section}
-				</form>				
-				<form action="" method="post">				
-				  	<tr>                               
-					<input type="hidden" value="addmore" name="admore_coupon" />        
+				</form>
+				<form action="" method="post">
+				  	<tr>
+					<input type="hidden" value="addmore" name="admore_coupon" />
                     <td align="center">
-					<input type="text" name="total"  /></td>                    
+					<input type="text" name="total"  /></td>
 					<td align="center">
-					<input style="width:35px" type="text" value="1" name="use_time" />					
+					<input style="width:35px" type="text" value="1" name="use_time" />
 					</td>
-					<td align="center"> 
+					<td align="center">
 					<input type="text" name="ref_code" value="{$gen_code}"  />
-					</td>   					
+					</td>
 					<td><input type="hidden" value="" name="status" /></td>
-                    </tr>					 
+                    </tr>
 				 <tr>
 				 <td colspan="4">
 				 <input type="submit"  style="float:right" value="Admore" />
 				 </td>
-				 </tr>				 			 
-				 </form>			 
-                 </table>				
+				 </tr>
+				 </form>
+                 </table>
                  <div class="paging" style="margin-top: 20px">
                     {section name=i loop=$paging}
                     <a title="{$paging[i][1]}" href="?keyword={$keyword}&approved={$approved}&paid={$paid}&auth={$auth}&page={$paging[i][0]}" class="{if $cursorPage==$paging[i][0]}btn3{else}btn2{/if}">{$paging[i][1]}</a>
@@ -90,7 +90,7 @@
           </div></td>
         </tr>
       </table>
-      
+
 </div>
 {literal}
 <style>
@@ -194,12 +194,10 @@ div.popup-calendar table td.today a {
 	border-color: #aaa;
 }
 div.popup-calendar table td a.selected, div.popup-calendar table td a:hover {
-	background: #333; 
+	background: #333;
 	color: #fff;
 }
 
-</style>
-.smart-btn {display: inline-block}
 </style>
 <script type="text/javascript">
 $(document).ready(init);
@@ -208,7 +206,7 @@ function init()
 
 	// OPTIONALLY SET THE DATE FORMAT FOR ALL DATE PICKERS ON THIS PAGE
 	$.datePicker.setDateFormat('ymd', '-');
-	
+
 	// OPTIONALLY SET THE LANGUAGE DEPENDANT COPY IN THE POPUP CALENDAR
 	/*
 	$.datePicker.setLanguageStrings(
@@ -217,9 +215,9 @@ function init()
 		{p:'Anterior', n:'Siguiente', c:'Cierre', b:'Elija la fecha'}
 	);
 	*/
-	
+
 	// DIFFERENT OPTIONS SHOWING HOW YOU MIGHT INITIALISE THE DATE PICKER (UNCOMMENT ONE AT A TIME) //
-	
+
 	// all inputs with a class of "date-picker" have a date picker which lets you pick any date in the future
 	//$('input.date-picker').datePicker();
 	// OR
@@ -231,7 +229,7 @@ function init()
 	// OR
 	// all inputs with a class of "date-picker" have a date picker which lets you pick any date from 05/03/2006 till 05/11/2006
 	//$('input.date-picker').datePicker({startDate:'05/03/2006', endDate:'05/11/2006'});
-	// OR 
+	// OR
 	// the input with an id of "date" will have a date picker that lets you pick any day in the future...
 	$('input#date1').datePicker();
 	// ...and the input with an id of "date2" will have a date picker that lets you pick any day between the 02/11/2006 and 13/11/2006
@@ -247,7 +245,7 @@ function init()
 		}
 	);
 	*/
-	
+
 	// END DIFFERENT OPTIONS //
 }
 </script>

@@ -56,6 +56,11 @@
                                                         <label class="col-sm-3 control-label" for="avatar">Ảnh Scan CMND <span class="error">(nếu có)</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="file" class="col-sm-8" id="avatar" name="avatar" value="{$myProfile.avatar}" />
+                                                            {if $myProfile.avatar}
+                                                                <div class="col-md-5">
+                                                                    <img src="{$myProfile.avatar}" alt="{$myProfile.fullname}" class="img-thumbnail">
+                                                                </div>
+                                                            {/if}
                                                         </div>
                                                     </div>
                                                     <div class="form-group">

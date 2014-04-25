@@ -320,6 +320,26 @@ function update_user($post_vars) {
     return false;
 }
 
+function quick_register_new_user($post_vars) {
+    global $_config;
+    if (!isset($_config)) {
+        $_config = load_config();
+    }
+
+    foreach ($post_vars as $key => $value) {
+        if ($key == 'password') {
+            $post[$key] = $value;
+            continue;
+        }
+        $post[$key] = mysql_real_escape_string(strip_tags(trim($value)));
+    }
+
+    if (!($res = mysql_query('' . 'INSERT INTO `users` (`username` , `password` , `utype` , `fullname` , `email` , `address` , `city` , `state` , `country` , `zip` , `phone` , `company` , `paymethod_id` , `paymethod_info` , `getnewsletter` , `status`,balance , last_money_sent , pub_show_net_ads , filter_cat_ids, signup_date, last_login, ref_code) VALUES ( \'' . $post['username'] . '\', \'' . md5($post['password']) . '\', \'pub+adv\', \'\', \'' . $post['email'] . '\', \'\', \'' . $post['city'] . '\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\' , \'1\', 0, \'0000-00-00\', \'N\', \'\', curdate(), curdate(), \'\' ) '))) {
+        exit(mysql_error());
+    }
+    if($res) return true;
+    else return false;
+}
 function register_new_user($post_vars) {
     global $_config;
     if (!isset($_config)) {

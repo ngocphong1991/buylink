@@ -8,7 +8,7 @@
                 </div>
                 <div class="right-inner">
                     <h4 class="border-bold">Nạp tiền</h4>
-                    {if isset($text)}<div class="alert alert-info">{$text}</div>{/if}
+                    {if isset($text)}{$text}{/if}
                 </div>
             </div>
         </div>

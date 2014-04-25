@@ -1,14 +1,16 @@
 <div class="col-md-3 left-slider">
     <div class="register-block">
         <h6>SIGN UP IN UNDER 1 MINUTE</h6>
-        <form name="register" method="post">
+        <form id="quickRegister" name="quickRegister" action="register.php" method="post">
+            {if isset($msg_quick)}<div class="alert alert-danger">{$msg_quick}</div>{/if}
             <ul>
-                <li><label for="first-name">Your first name*</label></li>
-                <li><input type="text" id="first-name" name="first-name"/></li>
-                <li><label for="last-name">Your last name*</label></li>
-                <li><input type="text" id="last-name" name="last-name"></li>
+                <input type="hidden" value="1" name="quick-register">
+                <li><label for="username">Your username*</label></li>
+                <li><input type="text" class="required" value="{$smarty.post.username}" id="username" name="username"/></li>
+                <li><label for="password">Your password*</label></li>
+                <li><input type="password" class="required" id="password" name="password"></li>
                 <li><label for="email">Your email address*</label></li>
-                <li><input type="text" id="email" name="email"></li>
+                <li><input type="text" class="required email" value="{$smarty.post.email}" id="email" name="email"></li>
                 <li><button>Complete registration</button></li>
             </ul>
         </form>
@@ -19,3 +21,11 @@
         <p><a href="#" title="Join Now">Join Now!</a>
     </div>
 </div>
+{literal}
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery.validator.messages.required = "";
+            jQuery("#quickRegister").validate();
+        })
+    </script>
+{/literal}
