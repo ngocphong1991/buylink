@@ -22,27 +22,27 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {section name=i loop=$ids}
+                                {section name=i loop=$objectOderEdit}
                                 <tr>
-                                        <td>{$ids[i].websitename}</td>
-                                        <td>>{$ids[i].buying_date}</a></td>
-                                        <td>{$ids[i].end_date}</td>
+                                        <td>{$objectOderEdit[i].websitename}</td>
+                                        <td>{$objectOderEdit[i].buying_date}</a></td>
+                                        <td>{$objectOderEdit[i].end_date}</td>
                                         <td>
                                             <div class="form-group">
                                                 <div class="col-md-12">
-                                                    <input type="text" value="{$ids[i].ad_des}" name="link_text" class="col-md-12">
+                                                    <input type="text" value="{$objectOderEdit[i].ad_des}" name="link_text" class="col-md-12">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-md-12">
-                                                    <input type="text" value="{$ids[i].ad_url}" name="link_url" class="col-md-12">
+                                                    <input type="text" value="{$objectOderEdit[i].ad_url}" name="link_url" class="col-md-12">
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>USD {$ids[i].price|number_format}</td>
+                                        <td>USD {$objectOderEdit[i].price|number_format}</td>
                                         <td><a href="{$_config.www}/links">Trở lại</a></td>
                                     </tr>
-                                    <input type="hidden" name="order_id"  value="{$ids[i].adv_id}">
+                                    <input type="hidden" name="order_id"  value="{$objectOderEdit[i].adv_id}">
                                     {/section}
                                 </tbody>
                             </table>
@@ -134,7 +134,7 @@
                                                 <th>Textlink</th>
                                                 <th>Trên trang</th>
                                                 <th>Thời gian</th>
-                                                <th><input type="checkbox"></th>
+                                                <th><img src="{$template_dir}/images/pencel.png"></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -146,7 +146,7 @@
                                                     <td>{$ids[i].ad_des}</td>
                                                     <td>{$ids[i].ad_url}</td>
                                                     <td width="13%">{$ids[i].buying_date} - {$ids[i].end_date}</td>
-                                                    <td><a href="{$_config.www}/links/?edit=edit&order_id={$ids[i].adv_id}"><img src="{$template_dir}/images/pencel.png"></a></td>
+                                                    <td><a href="{$_config.www}/links?edit=edit&order_id={$ids[i].adv_id}"><img src="{$template_dir}/images/pencel.png"></a></td>
 
                                                 </tr>
                                             {/section}
@@ -180,11 +180,11 @@
 
                                                     <label for="inputEmail3" class="col-sm-2 control-label"><strong>Từ ngày:</strong></label>
                                                     <div class="col-md-3">
-                                                        <input type="text" value="{if $buying_date}{$buying_date}{else}{$smarty.now|date_format:"%Y/%m/%d"}{/if}" name="buying_date" class="col-md-12">
+                                                        <input type="text" value="{if $buying_date_expire}{$buying_date_expire}{else}{$smarty.now|date_format:"%Y/%m/%d"}{/if}" name="buying_date_expire" class="col-md-12">
                                                     </div>
                                                     <label for="inputEmail3" class="col-sm-2 control-label"><strong>Đến:</strong></label>
                                                     <div class="col-md-3">
-                                                        <input type="text" value='{if $end_date}{$end_date}{else}{$smarty.now|date_format:"%Y/%m/%d"}{/if}' name="end_date" class="col-md-12">
+                                                        <input type="text" value='{if $end_date_expire}{$end_date_expire}{else}{$smarty.now|date_format:"%Y/%m/%d"}{/if}' name="end_date_expire" class="col-md-12">
                                                     </div>
                                                     <input type="hidden" value="3" name="tabactive">
                                                 </div>
@@ -208,7 +208,7 @@
                                                 <th>Textlink</th>
                                                 <th>Trên trang</th>
                                                 <th>Thời gian</th>
-                                                <th><input type="checkbox"></th>
+                                                <th><img src="{$template_dir}/images/pencel.png"></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -220,7 +220,8 @@
                                                     <td>{$idsexpire[i].ad_des}</td>
                                                     <td>{$idsexpire[i].ad_url}</td>
                                                     <td width="13%">{$idsexpire[i].buying_date} - {$idsexpire[i].end_date}</td>
-                                                    <td>0</td>
+                                                    <td><a href="{$_config.www}/links?edit=edit&order_id={$idsexpire[i].adv_id}"><img src="{$template_dir}/images/pencel.png"></a></td>
+
                                                 </tr>
                                             {/section}
 

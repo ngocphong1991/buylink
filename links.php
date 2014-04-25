@@ -1,17 +1,12 @@
 <?php
 include ("include/config.php");
+include_once("global.php");
 $msg = "";
 $userId = intval($_SESSION[uid]);
 if(!isset($_SESSION[uid])){
 	header("location: ".$_config[www]."/account.php");
 	exit();
 }
-
-if($_POST){
-    echo 'da posst';
-}
-
-
 $order_id = isset($_GET[order_id])?intval($_GET[order_id]):0;
 $adv_id = isset($_GET[adv_id])?intval($_GET[adv_id]):0;
 $export_cls = isset($_GET[type])?$_GET[type]:'';
@@ -20,6 +15,10 @@ $smarty->assign('_session',$_SESSION);
 
 $buying_date = $_GET['buying_date'];
 $end_date = $_GET['end_date'];
+
+$buying_date_expire = $_GET['buying_date_expire'];
+$end_date_expire = $_GET['end_date_expire'];
+
 $adv_id = $_GET['adv_id'];
 $tabactive = $_GET['tabactive'];
 $edit = $_GET['edit'];
@@ -27,6 +26,9 @@ $edit = $_GET['edit'];
 
 $smarty->assign('buying_date',$buying_date);
 $smarty->assign('end_date',$end_date);
+$smarty->assign('buying_date_expire',$buying_date_expire);
+$smarty->assign('end_date_expire',$end_date_expire);
+
 $smarty->assign('tabactive',$tabactive);
 if(isset($edit) && $edit)
     $smarty->assign('edit',$edit);
@@ -57,24 +59,22 @@ if($_GET['keywords']!='Nhập từ khóa cần tìm' && $_GET['keywords']!='')  
 		}
 	}
 	$all = getListOrder($order_id, $userId,$buying_date,$end_date,$keywords,'active');
-    $allexpire = getListOrder($order_id, $userId,$buying_date,$end_date,$keywords,'expire');
+    $allexpire = getListOrder($order_id, $userId,$buying_date_expire,$end_date_expire,$keywords,'expire');
+    if(isset($all) and $all)
+        $objectOderEdit = $all[ids];
+    else  $objectOderEdit = $allexpire[ids];
+
 
 	if($export_cls) export_excel($all[all]);
 	
 	$where .=  ' and uid = '.$userId;
-
-//echo '<pre>';
-//print_r($all[ids]);
-//echo '<pre>';
-
-
-	//$all = $cls_advertisersinfo->getAll($where);
     $smarty->assign('msg', $msg);
     $smarty->assign('order_id', $order_id);
     $smarty->assign('ids', $all[ids]);
     $smarty->assign('all', $all[all]);
     $smarty->assign('idsexpire', $allexpire[ids]);
     $smarty->assign('allexpire', $allexpire[all]);
+    $smarty->assign('objectOderEdit', $objectOderEdit);
 
     $content = $smarty->fetch('links.tpl');
 
@@ -86,6 +86,11 @@ if($adv_id>0)
 if(isset($buying_date) and $buying_date and isset($end_date) and $end_date){
     $tlwhere .= " AND ( (`buying_date` BETWEEN '$buying_date' AND '$end_date') OR  (`end_date` BETWEEN '$buying_date' AND '$end_date')) ";
 }
+if(isset($buying_date_expire) and $buying_date_expire and isset($end_date_expire) and $end_date_expire){
+    echo 'co vao day khong';
+    $tlwhere .= " AND ( (`buying_date` BETWEEN '$buying_date_expire' AND '$end_date_expire') OR  (`end_date` BETWEEN '$buying_date_expire' AND '$end_date_expire')) ";
+}
+
 if(isset($status) and $status == 'expire'){
     $tlwhere .= " AND ( `buying_date` < CURDATE( ) AND  `end_date` <  CURDATE( ) ) ";
 
@@ -97,6 +102,8 @@ if(isset($status) and $status == 'active'){
 if(isset($keywords) and $keywords){
     $tlwhere .= " AND (advertisersinfo.ad_des like '%$keywords%' or advertisersinfo.ad_url like '%$keywords%')";
 }
+    //echo "select publishersinfo.pid, publishersinfo.url, publishersinfo.websitename,publishersinfo.google_page_rank, publishersinfo.description, advertisersinfo.price, advertisersinfo.adv_id, advertisersinfo.ad_des, advertisersinfo.buying_date,advertisersinfo.end_date, advertisersinfo.ad_url from publishersinfo LEFT JOIN (advertisersinfo) ON (advertisersinfo.pid=publishersinfo.pid) ".$tlwhere." order by advertisersinfo.adv_id DESC ";
+//echo '<br/>';
 $list_order = mysql_query("select publishersinfo.pid, publishersinfo.url, publishersinfo.websitename,publishersinfo.google_page_rank, publishersinfo.description, advertisersinfo.price, advertisersinfo.adv_id, advertisersinfo.ad_des, advertisersinfo.buying_date,advertisersinfo.end_date, advertisersinfo.ad_url from publishersinfo LEFT JOIN (advertisersinfo) ON (advertisersinfo.pid=publishersinfo.pid) ".$tlwhere." order by advertisersinfo.adv_id DESC ");
 
 	while($r = @mysql_fetch_assoc($list_order)) {
@@ -109,7 +116,6 @@ $list_order = mysql_query("select publishersinfo.pid, publishersinfo.url, publis
 	}
 	return $list_arr;
 }
-
 $smarty->assign('content',$content);
 $smarty->display('master_page.tpl');
 

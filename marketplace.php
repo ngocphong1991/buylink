@@ -83,7 +83,7 @@ while ($rl = mysql_fetch_assoc($lres)) {
 	$tl = $rl[length];
 	$lens[$tl] = $tl.' '.$_lang['Day'].' '.$_lang['Ads'];
 	}
-	
+
 $lang_list = get_list('language','language');
 $smarty->assign('langs',$lang_list['language']);
 $smarty->assign('lang_ids',$lang_list['lid']);

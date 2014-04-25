@@ -19,20 +19,14 @@ RewriteRule ^publishers/?$ publishers.php?step=1
 RewriteRule ^advertisers/?$ advertisers.php
 RewriteRule ^marketplace/?$ marketplace.php
 
-
 #Thang update
 RewriteRule ^buyalink/?$ buyalink.php
 RewriteRule ^buyarelink/?$ buyarelink.php
-#RewriteRule ^buyalinkthanhtoan/?$ buyalinkthanhtoan.php
 RewriteRule ^checklevel/?$ checklevel.php
-
 RewriteRule ^managearticlelink/?$ manage-article-link.php
 RewriteRule ^manage-group-buylink/?$ manage-group-buylink.php
 RewriteRule ^weblike/?$ weblike.php
-
-
 #End Thang update
-
 
 RewriteRule ^dashboard/?$ dashboard.php
 RewriteRule ^links/?$ links.php
