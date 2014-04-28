@@ -7,6 +7,7 @@ $cls_user = new User();
 
 // multiple recipients
 $arr_urr = getListAds();
+
 //print_r($arr_urr);
 if(count($arr_urr)>0)
 $arr_user = getFileContent($arr_urr);
@@ -106,8 +107,9 @@ mail($to, $subject, $message, $headers);
 
 function getListAds(){
 	$arr_url = array();
-	$slq ="select publishersinfo.pid, publishersinfo.uid, publishersinfo.url, publishersinfo.set_price, advertisersinfo.end_date,advertisersinfo.adv_id, advertisersinfo.ad_url,advertisersinfo.ad_des from publishersinfo LEFT JOIN (advertisersinfo) ON (advertisersinfo.pid = publishersinfo.pid) where publishersinfo.pid NOT IN (SELECT cronjob_publisher.pid FROM cronjob_publisher WHERE cron_time =  CURDATE()) AND publishersinfo.status = 2 and publishersinfo.update_date < CURDATE() and advertisersinfo.is_paid='Y' and advertisersinfo.start_date <= CURDATE() and advertisersinfo.end_date >= CURDATE() limit 30 ";
-	//$slq ="select publishersinfo.pid, publishersinfo.uid, publishersinfo.url, publishersinfo.set_price, advertisersinfo.end_date,advertisersinfo.adv_id, advertisersinfo.ad_url,advertisersinfo.ad_des from publishersinfo LEFT JOIN (advertisersinfo) ON (advertisersinfo.pid = publishersinfo.pid) where publishersinfo.pid NOT IN (SELECT cronjob_publisher.pid FROM cronjob_publisher WHERE cron_time =  CURDATE()) AND publishersinfo.status = 2 and publishersinfo.update_date < CURDATE() and advertisersinfo.is_paid='Y' and advertisersinfo.start_date <= CURDATE() and advertisersinfo.end_date >= CURDATE() limit 15 ";	
+	$slq ="select publishersinfo.pid, publishersinfo.uid, publishersinfo.url, publishersinfo.set_price, advertisersinfo.end_date,advertisersinfo.adv_id, advertisersinfo.ad_url,advertisersinfo.ad_des from publishersinfo LEFT JOIN (advertisersinfo) ON (advertisersinfo.pid = publishersinfo.pid) where  publishersinfo.status = 2 and publishersinfo.update_date < CURDATE() and advertisersinfo.is_paid='Y' and advertisersinfo.start_date <= CURDATE() and advertisersinfo.end_date >= CURDATE() limit 30 ";
+
+	//$slq ="select publishersinfo.pid, publishersinfo.uid, publishersinfo.url, publishersinfo.set_price, advertisersinfo.end_date,advertisersinfo.adv_id, advertisersinfo.ad_url,advertisersinfo.ad_des from publishersinfo LEFT JOIN (advertisersinfo) ON (advertisersinfo.pid = publishersinfo.pid) where publishersinfo.pid NOT IN (SELECT cronjob_publisher.pid FROM cronjob_publisher WHERE cron_time =  CURDATE()) AND publishersinfo.status = 2 and publishersinfo.update_date < CURDATE() and advertisersinfo.is_paid='Y' and advertisersinfo.start_date <= CURDATE() and advertisersinfo.end_date >= CURDATE() limit 15 ";
 	//$order_by = " order by advertisersinfo.adv_id DESC";
 	$money_earn_obj = mysql_query($slq.$order_by);
     while ($row = mysql_fetch_assoc($money_earn_obj)) {

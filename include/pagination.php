@@ -65,7 +65,7 @@ class TblPagignationClass
                                         $get_link = '';
                                         if(count($this->Get)){
                                             foreach($this->Get as $key => $val)
-                                                $get_link .= "&$key=$val";
+                                                if($key != 'offset' && $key != 'numrows')$get_link .= "&$key=$val";
                                         }
                                         $navigation.="<a href='".$this->FileName."?offset=$pgoffset&numrows=$this->NumofRows&$this->IdentifierVariable".$get_link."' class='adminmenu'>".$j."</a> &nbsp;";
 									}

@@ -33,7 +33,7 @@ function getVNDomain($domain, $type="noxml"){
 	if($type=='xml'){
 	$doc = new DOMDocument();
 	$doc->load( 'http://www.matbao.net/whoisXML.aspx?domain='.trim($domain).'' );
-  
+
 	$description = $doc->getElementsByTagName("item");
 		foreach( $description as $key=> $employee )
 		{		
@@ -47,7 +47,7 @@ function getVNDomain($domain, $type="noxml"){
 		//$vnDomainAge = get_web_page("http://www.matbao.net/RWhois.aspx?Domain=".trim($domain)."");
 	
 	}
-	
+
 	if(!$vnDomainAge) return 0;
 	  	$vnDomainAge=substr($vnDomainAge,strpos($vnDomainAge,'Issue Date :')+strlen('Issue Date :'));	
 		if($vnDomainAge === false){} else{
@@ -66,82 +66,34 @@ function getVNDomain($domain, $type="noxml"){
 function getDomainAge($domain, $type) {
 	$domain = getTrueDomain($domain);
 	$domain = getDomainName($domain,'domain');
-	$check_vn_domain = strpos($domain, '.vn');
-	if ($check_vn_domain === false) {
-		$domain_age = getOtherDomain($domain,$type);
-	} else {
-		$domain_age = getVNDomain($domain,'xml');
-	}
-	return $domain_age;
+    $domainAge = new DomainAge();
+    return trim($domainAge->age($domain));
 }
 
-function getOtherDomain($domain){		
-	// case 1 
-/*
-$username="karumi";
-$password="textlinkvn123";    
-$contents = file_get_contents("http://www.whoisxmlapi.com//whoisserver/WhoisService?domainName=linkhay.com&username=$username&password=$password&outputFormat=JSON");
-//echo $contents;
-$res=json_decode($contents);
-if($res){
-  if($res->ErrorMessage){
-      echo $res->ErrorMessage->msg;
-  }    
-  else{
-      $whoisRecord = $res->WhoisRecord;
-      if($whoisRecord){
-       // echo "Domain name: " . print_r($whoisRecord->domainName,1) ."<br/>";
-        //echo "Created date: " .print_r($whoisRecord->createdDate,1) ."<br/>";
-        $domain_age = trim(print_r($whoisRecord->createdDate,1));
-        $domain_age = str_replace('.', '', $domain_age);
-        $domain_age = strtotime($domain_age); 
-		echo $domain_age;
-		
-        return $domain_age;
-       // echo "Updated date: " .print_r($whoisRecord->updatedDate,1) ."<br/>";
-        //if($whoisRecord->registrant)echo "Registrant: <br/><pre>" . print_r($whoisRecord->registrant->rawText, 1) ."</pre>";
-        //print_r($whoisRecord);
-      }
-  }
-}
-    */
-		$result = get_web_page("http://www.domainageonline.com/process_tool.php?domain=".$domain."");
-		
-		$domain_age=substr($result,strpos($result,'first registered on <strong>')+strlen('first registered on <strong>'));	
-		$domain_age=substr($domain_age,0,strpos($domain_age,'</strong>'));		
-		//$domain_age = strtotime(trim($domain_age));
-		if(!$domain_age){		
-			$result = whois::lookup($domain);	
-			if(strstr($result, " No match")){
-				   $domain_age = 0;
-			}else{			
-				$domain_age=substr($result,strpos($result,'Creation Date:')+strlen('Creation Date:'));	
-				if($domain_age === false){} else{
-					$domain_age=substr($domain_age,0,strpos($domain_age,'Expiration Date: '));
-			}
-		} 
-		
-		$domain_age = strip_tags($domain_age);
-		unset($result);
+function getOtherDomain($domain){
+
+    $result = get_web_page("http://www.domainageonline.com/process_tool.php?domain=".$domain."");
+
+    $domain_age=substr($result,strpos($result,'first registered on <strong>')+strlen('first registered on <strong>'));
+    $domain_age=substr($domain_age,0,strpos($domain_age,'</strong>'));
+    //$domain_age = strtotime(trim($domain_age));
+    if(!$domain_age){
+        $result = whois::lookup($domain);
+        if(strstr($result, " No match")){
+               $domain_age = 0;
+        }else{
+            $domain_age=substr($result,strpos($result,'Creation Date:')+strlen('Creation Date:'));
+            if($domain_age === false){} else{
+                $domain_age=substr($domain_age,0,strpos($domain_age,'Expiration Date: '));
+        }
+    }
+
+    $domain_age = strip_tags($domain_age);
+    unset($result);
 			
 	}
 	$domain_age = strtotime(trim($domain_age));	
 	return $domain_age;
-   
-	/*		
-	//get by whoxml api
-	//echo "http://www.whoisxmlapi.com//whoisserver/WhoisService?domainName=".$domain."&outputFormat=JSON";
-	//$domain = get_web_page("http://www.whoisxmlapi.com//whoisserver/WhoisService?domainName=".$domain."&outputFormat=JSON");
-
-	$domain = json_decode($domain);
-	
-	//echo  $domain->WhoisRecord->createdDate."aaaaaaa";
-	//print_r($domain);
-	$domain_age = strtotime(trim($domain->WhoisRecord->createdDate));
-
-	return $domain_age;
-	*/
-//return trim($domain->rank);
 }
 
 class whois
@@ -167,6 +119,80 @@ class whois
          return $result;
      }
 }
+
+class DomainAge{
+    private $WHOIS_SERVERS=array(
+        "com"               =>  array("whois.verisign-grs.com","/Creation Date:(.*)/"),
+        "net"               =>  array("whois.verisign-grs.com","/Creation Date:(.*)/"),
+        "org"               =>  array("whois.pir.org","/Created On:(.*)/"),
+        "info"              =>  array("whois.afilias.info","/Created On:(.*)/"),
+        "biz"               =>  array("whois.neulevel.biz","/Domain Registration Date:(.*)/"),
+        "us"                =>  array("whois.nic.us","/Domain Registration Date:(.*)/"),
+        "uk"                =>  array("whois.nic.uk","/Registered on:(.*)/"),
+        "ca"                =>  array("whois.cira.ca","/Creation date:(.*)/"),
+        "tel"               =>  array("whois.nic.tel","/Domain Registration Date:(.*)/"),
+        "ie"                =>  array("whois.iedr.ie","/registration:(.*)/"),
+        "it"                =>  array("whois.nic.it","/Created:(.*)/"),
+        "cc"                =>  array("whois.nic.cc","/Creation Date:(.*)/"),
+        "ws"                =>  array("whois.nic.ws","/Domain Created:(.*)/"),
+        "sc"                =>  array("whois2.afilias-grs.net","/Created On:(.*)/"),
+        "mobi"              =>  array("whois.dotmobiregistry.net","/Created On:(.*)/"),
+        "pro"               =>  array("whois.registrypro.pro","/Created On:(.*)/"),
+        "edu"               =>  array("whois.educause.net","/Domain record activated:(.*)/"),
+        "tv"                =>  array("whois.nic.tv","/Creation Date:(.*)/"),
+        "travel"            =>  array("whois.nic.travel","/Domain Registration Date:(.*)/"),
+        "in"                =>  array("whois.inregistry.net","/Created On:(.*)/"),
+        "me"                =>  array("whois.nic.me","/Domain Create Date:(.*)/"),
+        "cn"                =>  array("whois.cnnic.cn","/Registration Date:(.*)/"),
+        "asia"              =>  array("whois.nic.asia","/Domain Create Date:(.*)/"),
+        "ro"                =>  array("whois.rotld.ro","/Registered On:(.*)/"),
+        "aero"              =>  array("whois.aero","/Created On:(.*)/"),
+        "nu"                =>  array("whois.nic.nu","/created:(.*)/"),
+        "vn"                =>  array("whois.net.vn","/Issue Date :(.*)/"),
+    );
+    public function age($domain)
+    {
+        $domain = trim($domain); //remove space from start and end of domain
+        if(substr(strtolower($domain), 0, 7) == "http://") $domain = substr($domain, 7); // remove http:// if included
+        if(substr(strtolower($domain), 0, 4) == "www.") $domain = substr($domain, 4);//remove www from domain
+        if(preg_match("/^([-a-z0-9]{2,100})\.([a-z\.]{2,8})$/i",$domain))
+        {
+            $domain_parts = explode(".", $domain);
+            $tld = strtolower(array_pop($domain_parts));
+            if(!$server=$this->WHOIS_SERVERS[$tld][0]) {
+                return false;
+            }
+
+            if($tld == 'vn') $res = file_get_contents("http://www.whois.net.vn/whois.php?domain=$domain&act=getwhois");
+            else $res=$this->queryWhois($server,$domain);
+
+            if(preg_match($this->WHOIS_SERVERS[$tld][1],$res,$match))
+            {
+                if(count(explode('/', $match[1]))) $match[1] = trim(str_replace('<br>','',str_replace('/', '-', $match[1])));
+                date_default_timezone_set('UTC');
+                return strtotime($match[1]);
+            }
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+    private function queryWhois($server,$domain)
+    {
+        $fp = @fsockopen($server, 43, $errno, $errstr, 20) or die("Socket Error " . $errno . " - " . $errstr);
+        if($server=="whois.verisign-grs.com")
+            $domain="=".$domain;
+        fputs($fp, $domain . "\r\n");
+        $out = "";
+        while(!feof($fp)){
+            $out .= fgets($fp);
+        }
+        fclose($fp);
+        return $out;
+    }
+}
+
 
 
 ?>
