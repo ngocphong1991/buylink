@@ -20,6 +20,11 @@
         <p>Earn additional money by placing an affiliate link to MediaWhiz SEO on your website. Set-up only takes 2 minutes!</p>
         <p><a href="#" title="Join Now">Join Now!</a>
     </div>
+
+    <div class="fanpagefacebook">
+
+    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FFacebookDevelopers&amp;width=245&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:245px; height:258px;" allowTransparency="true"></iframe>
+    </div>
 </div>
 {literal}
     <script type="text/javascript">
