@@ -266,12 +266,18 @@
 .advcontent div.center{
     border: 1px solid #CCCCCC;
     padding: 15px 15px 15px 0px;
+    margin-top: 20px;
 }
 .advcontent div.top{
 
     padding-left:  0px;
 }
+.advcontent div.top ul{
+
+    padding-left: 10px;
+}
 .advcontent div.bottom{
     margin-top: 30px;
     padding-left: 0px;
+    margin-bottom: 30px;
 }
