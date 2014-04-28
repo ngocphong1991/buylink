@@ -263,6 +263,9 @@
 ================================================ advertisers =============================================================
 =======================================================================================================================
 */
+.advcontent{
+    font-size: 13px;
+}
 .advcontent div.center{
     border: 1px solid #CCCCCC;
     padding: 15px 15px 15px 0px;
@@ -274,7 +277,7 @@
 }
 .advcontent div.top ul{
 
-    padding-left: 10px;
+    padding-left: 20px;
 }
 .advcontent div.bottom{
     margin-top: 30px;
