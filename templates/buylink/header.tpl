@@ -30,7 +30,9 @@
         <nav class="tl-nav">
             <a href="{$_config.www}/advertisers" title="Advertisers" class="tl-nav-item active advertisers">Advertisers <i class="icon-advertisers"></i></a>
             <a href="{$_config.www}/publishers" title="Publishers" class="tl-nav-item publishers">Publishers <i class="icon-publishers"></i></a>
+            <!--
             <a href="#" title="Agencies" class="tl-nav-item agencies">Agencies <i class="icon-agencies"></i></a>
+            -->
         </nav>
     </div>
 </div>

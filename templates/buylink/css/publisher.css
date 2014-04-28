@@ -259,3 +259,19 @@
 .links{
     font-size: 13px;
 }
+/*
+================================================ advertisers =============================================================
+=======================================================================================================================
+*/
+.advcontent div.center{
+    border: 1px solid #CCCCCC;
+    padding: 15px 15px 15px 0px;
+}
+.advcontent div.top{
+
+    padding-left:  0px;
+}
+.advcontent div.bottom{
+    margin-top: 30px;
+    padding-left: 0px;
+}

@@ -1,4 +1,4 @@
-<div class="wrapper paper">
+﻿<div class="wrapper paper">
     <div class="container">
         <div class="row">
             {include file='left-menu.tpl'}
@@ -73,17 +73,11 @@
                         <div class="col-md-12">
                             <div class="blog-tabs">
                                 <ul id="blog-tab" class="nav nav-tabs">
-                                    <li class=""><a href="#blmtab1" data-toggle="tab">Textlink chưa thanh toán</a></li>
                                     <li class="{if !$tabactive or $tabactive eq 2}active{/if}"><a href="#blmtab2" data-toggle="tab">Textlink đang chạy</a></li>
                                     <li class="{if $tabactive eq 3}active{/if}"><a href="#blmtab3" data-toggle="tab">Textlink hết hạn</a></li>
-                                    <li class=""><a href="#blmtab4" data-toggle="tab">Textlink đã hủy</a></li>
-                                    <li class=""><a href="#blmtab5" data-toggle="tab">Textlink đã dừng lại</a></li>
-                                    <li class=""><a href="#blmtab6" data-toggle="tab">Textlink bị từ chối</a></li>
+
                                 </ul>
                                 <div id="myTabContent" class="tab-content">
-
-                                    <div class="tab-pane fade in" id="blmtab1">
-                                    </div>
                                     <div class="tab-pane fade {if !$tabactive or $tabactive eq 2}active in{/if}" id="blmtab2">
                                         <form method="get" id="marketplaceFilter" class="form-horizontal">
                                             <div class="control-group">
@@ -230,13 +224,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane fade" id="blmtab4">
-                                    </div>
-                                    <div class="tab-pane fade" id="blmtab5">
-                                    </div>
-                                    <div class="tab-pane fade" id="blmtab6">
 
-                                    </div>
                                     <div class="tab-pane fade" id="blmtab7">
                                         <!--<form method="get" id="marketplaceFilter" class="form-horizontal">
                                             <div class="control-group">
