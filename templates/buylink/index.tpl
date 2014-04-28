@@ -53,15 +53,19 @@
             <div class="col-md-8">
                 <div class="blog-content">
                     <h4>Giới Thiệu BuyLink</h4>
-                    <p class="description">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                    <p class="description">
+                        Trong thế giới Internet ngày nay, việc website của bạn xuất hiện trên những vị trí đầu của các cỗ máy tìm kiếm không chỉ giúp mang lại lượng khách hàng tiềm năng lớn mà còn giúp bạn khẳng định giá trị thương hiệu cũng như mở rộng cơ hội phát triển trên nền tảng Internet và đó chính là lý do vì sao Textlink.vn được tạo ra và phát triển.
+                        Chúng tôi là những người đi tiên phong nhằm tạo ra một thế giới Internet phát triển tại Việt Nam. Chúng tôi am hiểu tường tận về SEO, SEM và tư vấn cho bạn cách marketing hiệu quả nhất để tạo ra doanh thu trực tuyến. Bên cạnh đó, với nhiều năm kinh nghiệm trong lĩnh vực Internet Marketing đội ngũ tư vấn của Textlink.vn giúp khách hàng xây dựng chiến dịch Marketing phù hợp với mục tiêu, tiết kiệm tối đa chi phí và vượt lên trên đối thủ cạnh tranh.
+                    </p>
                     <p class="view-more"><a class="more" title="Xem thêm" href="{$_config.www}/abouts">Xem thêm</a></p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="blog-tabs">
                     <ul class="nav nav-tabs" id="blog-tab">
-                        <li class="active"><a data-toggle="tab" href="#blog">Blog</a></li>
-                        <li class=""><a data-toggle="tab" href="#faq">Hỏi đáp</a></li>
+                        <!--
+                        <li class="active"><a data-toggle="tab" href="#blog">Blog</a></li>-->
+                        <li class="active"><a data-toggle="tab" href="#faq">Hỏi đáp</a></li>
                         <li class=""><a data-toggle="tab" href="#new">Tin tức</a></li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -90,4 +94,8 @@
             </div>
         </div>
     </div>
+</div>
+<div class="doitac">
+    <p>noidug</p>
+    <img alt="đối tác" src="{$template_dir}/images/doi-tac.png">
 </div>

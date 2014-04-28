@@ -287,3 +287,17 @@
 .fanpagefacebook{
     margin-left: -10px;
 }
+/*
+================================================ index    =============================================================
+=======================================================================================================================
+*/
+.doitac{
+    position: absolute;
+    width: 100%;
+    background: url("../images/bg-doi-tac.png") repeat-x;
+    height: 200px;
+}
+.message-error{
+    color: red;
+    font-weight: bold;
+}
